@@ -1,0 +1,7 @@
+
+bump:
+  recurse: false
+  file: 'checkout/lib/spree/checkout/version.rb'
+
+release:
+  recurse: true

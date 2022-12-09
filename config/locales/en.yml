@@ -1,0 +1,9 @@
+en:
+  spree:
+    checkout:
+      cart_form:
+        reset: Reset
+      cart:
+        remove_item: Remove Item
+        do_you_have_a_promo_code: Do you have a Promo Code?
+        discounts: Discounts
