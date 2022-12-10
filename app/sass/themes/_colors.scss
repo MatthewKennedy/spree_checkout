@@ -1,5 +1,20 @@
+:root {
+  body {
+    --spree-checkout-aside-bg: #fafafa;
+    --spree-checkout-aside-border-color: #d7dcde;
+  }
+}
 
-aside {
-  border-left: 1px solid #d7dcde;
-  background-color: #fafafa;
+
+@media only screen and (min-width: 1000px) {
+   div#checkout-container {
+    &::before {
+      background-color: var(--bs-body-bg);
+    }
+
+    &::after {
+      border-left: 1px solid  var(--spree-checkout-aside-border-color);
+      background-color: var(--spree-checkout-aside-bg);
+    }
+   }
 }
