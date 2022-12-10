@@ -1,0 +1,48 @@
+body#checkout-page {
+  padding: 0;
+  margin: 0;
+  div#checkout-container {
+    display: grid;
+
+    margin: 0 !important;
+    padding:0 !important;
+    height: 100vh;
+  }
+
+  @media only screen and (min-width: 1000px) {
+    div#checkout-container {
+      grid-template-columns: 60% 40%;
+      grid-template-rows: 80px 70px min-content 50px;
+      grid-template-areas:
+      "header summary"
+      "main summary"
+      "footer summary";
+    }
+
+    header {
+      grid-area: header;
+      grid-row: 2 / 3;
+      border: 3px solid green;
+    }
+
+    aside {
+      grid-area: summary;
+      grid-row: 1 / 5;
+      min-height: 100vh;
+    }
+
+    main {
+      padding-top:0;
+      grid-area: main;
+      grid-row: 3 / 4;
+      border: 3px solid red;
+    }
+
+    footer {
+      padding-top:0;
+      grid-area: footer;
+      grid-row: 4 / 5;
+      border: 3px solid purple;
+    }
+  }
+}
