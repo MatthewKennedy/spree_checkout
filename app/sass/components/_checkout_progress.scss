@@ -1,0 +1,31 @@
+#checkout-steps {
+  span {
+    position: relative;
+    margin-right: 20px;
+
+    &::after {
+      content: url('/spree/checkout/chevron-right.svg');
+      display: inline-block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0;
+    }
+
+    a {
+      color: var(--spree-checkout-link-color);
+
+      &:hover {
+        color: var(--spree-checkout-link-color);
+      }
+
+      &.completed {
+        color: rgb(25,144,198);
+      }
+    }
+  }
+
+  span:last-child::after {
+    display: none;
+  }
+}

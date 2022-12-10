@@ -3,7 +3,7 @@ module Spree
     def spree_checkout_svg_tag(file_name, options = {})
       prefixed_file = "spree/checkout/#{file_name}"
 
-      spree_checkout_svg_tag(prefixed_file, options)
+      inline_svg_tag(prefixed_file, options)
     end
 
     def checkout_progress_line(numbers: false)
@@ -20,23 +20,21 @@ module Spree
           css_classes << 'completed'
           text = link_to text, checkout_state_path(state)
         end
-        css_classes << 'cart-progress'
+
         css_classes << 'next' if state_index == current_index + 1
         css_classes << 'active' if state == @order.state
         css_classes << 'first' if state_index == 0
-        css_classes << 'pay' if state_index == 2
         css_classes << 'last' if state_index == states.length - 1
-        # No more joined classes. IE6 is not a target browser.
-        # Hack: Stops <a> being wrapped round previous items twice.
+
         if state_index < current_index
           content_tag('span', text, class: css_classes.join(' '))
         else
-          content_tag('span', content_tag('a', text), class: css_classes.join(' '))
+          content_tag('span', content_tag('a', text, class: css_classes.join(' ')), class: 'cart-progress')
         end
       end
-      content_tag('div',
-                  raw("<span class='cart-progress completed'><a href='#{spree.cart_path}'>#{Spree.t(:cart)} </a></span>" + items.join("\n")),
-                  class: 'steps-container text-center', id: "checkout-step-#{@order.state}")
+      content_tag(:div,
+                  raw("<span class='cart-progress'><a href='#{spree.cart_path}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join),
+                  class: "steps-container text-center step-#{@order.state}", id: 'checkout-steps')
     end
   end
 end
