@@ -1,0 +1,18 @@
+<%= fields_for :address, @ship_address do |f| %>
+  <% if @ship_address.country.states_required? || @ship_address.country.states.present? %>
+    <%= f.field_container :state do %>
+      <% if !@ship_address.country.states.present? && @ship_address.country.states_required? %>
+        <%= f.text_field :state_name, required: true %>
+      <% elsif @ship_address.country.states.present? %>
+        <%= f.collection_select :state_id, @ship_address.country.states.sort, :id, :name, {include_blank: true}, {required: @ship_address.country.states_required?} %>
+      <% end %>
+
+      <%= f.label :state_id, raw(state_label(@ship_address.country) + required_span_tag(@ship_address.country.states_required?)) %>
+    <% end %>
+  <% end %>
+
+  <%= f.field_container :zipcode do %>
+    <%= f.text_field :zipcode, required: @ship_address.country.zipcode_required? %>
+    <%= f.label :zipcode, (raw(zipcode_label(@ship_address.country)) + required_span_tag(@ship_address.country.zipcode_required?)) %>
+  <% end %>
+<% end %>

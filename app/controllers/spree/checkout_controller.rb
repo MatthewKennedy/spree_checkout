@@ -2,7 +2,7 @@ module Spree
   # This is somewhat contrary to standard REST convention since there is not
   # actually a Checkout object. There's enough distinct logic specific to
   # checkout which has nothing to do with updating an order that this approach
-  # is waranted.
+  # is warranted.
   class CheckoutController < Spree::StoreController
     include Spree::Checkout::AddressBook
 
@@ -50,6 +50,18 @@ module Spree
       end
     end
 
+    def update_country
+      @address = Spree::Address.new(update_country_params)
+
+      # Empty out the zipcode and State on Country change.
+      @address.zipcode = nil
+      @address.state = nil
+
+      respond_with(@address) do |format|
+        format.turbo_stream
+      end
+    end
+
     private
 
     def unknown_state?
@@ -81,7 +93,7 @@ module Spree
       end
     end
 
-    # Should be overriden if you have areas of your checkout that don't match
+    # Should be overridden if you have areas of your checkout that don't match
     # up to a step within checkout_steps, such as a registration step
     def skip_state_validation?
       false
@@ -143,6 +155,9 @@ module Spree
       # that; but if he doesn't, we need to build an empty one here
       @order.bill_address ||= Address.new(country: current_store.default_country, user: try_spree_current_user)
       @order.ship_address ||= Address.new(country: current_store.default_country, user: try_spree_current_user) if @order.checkout_steps.include?('delivery')
+
+      @bill_address ||= @order.bill_address
+      @ship_address ||= @order.ship_address
     end
 
     def before_delivery
@@ -207,6 +222,10 @@ module Spree
 
     def remove_store_credit_service
       Spree::Dependencies.checkout_remove_store_credit_service.constantize
+    end
+
+    def update_country_params
+      params.fetch(:address, {}).permit(permitted_address_attributes)
     end
   end
 end

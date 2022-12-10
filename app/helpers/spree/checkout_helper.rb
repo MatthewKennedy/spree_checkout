@@ -6,6 +6,10 @@ module Spree
       inline_svg_tag(prefixed_file, options)
     end
 
+    def express_checkout_payment_methods
+      checkout_available_payment_methods.select(&:hosted_checkout?)
+    end
+
     def checkout_progress_line(numbers: false)
       states = @order.checkout_steps
       items = states.each_with_index.map do |state, i|
