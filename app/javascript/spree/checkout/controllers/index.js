@@ -3,7 +3,7 @@
 import { Application } from '@hotwired/stimulus'
 
 // Stimulus - Spree Controllers
-import FormValidationController from './form_validation_controller'
+import FormValidationController from './form/validation_controller'
 
 // Stimulus - Setup
 window.Stimulus = Application.start()

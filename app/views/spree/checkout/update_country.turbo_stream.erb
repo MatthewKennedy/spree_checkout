@@ -1,0 +1,3 @@
+<%= turbo_stream.update "#{@address_partial}-state-and-zipcode" do %>
+  <%= render partial: "spree/checkout/addresses/#{@address_partial}" %>
+<% end %>

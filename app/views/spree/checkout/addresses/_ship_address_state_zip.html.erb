@@ -1,0 +1,20 @@
+<%= fields_for :order, @order do |ord| %>
+  <%= ord.fields_for :ship_address do |f| %>
+    <% if @order.ship_address.country.states_required? || @order.ship_address.country.states.present? %>
+      <div class="form-group form-floating">
+        <% if !@order.ship_address.country.states.present? && @order.ship_address.country.states_required? %>
+          <%= f.text_field :state_name, required: true, class: 'form-control', placeholder: raw(state_label(@order.ship_address.country) + required_span_tag(@order.ship_address.country.states_required?)) %>
+        <% elsif @order.ship_address.country.states.present? %>
+          <%= f.collection_select :state_id, @order.ship_address.country.states.sort, :id, :name, {include_blank: true}, {required: @order.ship_address.country.states_required?, class: 'form-select'} %>
+        <% end %>
+        <%= f.label :state_id, raw(state_label(@order.ship_address.country) + required_span_tag(@order.ship_address.country.states_required?)) %>
+      </div>
+    <% end %>
+
+    <div class="form-group form-floating">
+      <%= f.text_field :zipcode, required: @order.ship_address.country.zipcode_required?, class: 'form-control', placeholder: (raw(zipcode_label(@order.ship_address.country)) + required_span_tag(@order.ship_address.country.zipcode_required?)) %>
+      <%= f.label :zipcode, (raw(zipcode_label(@order.ship_address.country)) + required_span_tag(@order.ship_address.country.zipcode_required?)) %>
+    </div>
+  <% end %>
+<% end %>
+

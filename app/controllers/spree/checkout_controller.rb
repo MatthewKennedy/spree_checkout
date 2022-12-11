@@ -51,13 +51,15 @@ module Spree
     end
 
     def update_country
-      @address = Spree::Address.new(update_country_params)
+      @order = Spree::Order.new(update_country_params)
 
       # Empty out the zipcode and State on Country change.
-      @address.zipcode = nil
-      @address.state = nil
+      # @order.zipcode = nil
+      # @order.state = nil
 
-      respond_with(@address) do |format|
+      @address_partial = "#{params[:address_kind]}_state_zip"
+
+      respond_with(@order) do |format|
         format.turbo_stream
       end
     end
@@ -225,7 +227,7 @@ module Spree
     end
 
     def update_country_params
-      params.fetch(:address, {}).permit(permitted_address_attributes)
+      params.fetch(:order, {}).permit(permitted_order_attributes)
     end
   end
 end

@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= form_with modle: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}", class: "row" } do |form| %>
+  <%= form_with model: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}", class: "row" } do |form| %>
     <div class=col-12 data-hook=checkout_form_wrapper>
       <%= form.hidden_field :state_lock_version %>
       <%= render @order.state, form: form %>
