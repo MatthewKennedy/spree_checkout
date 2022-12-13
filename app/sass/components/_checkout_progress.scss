@@ -57,3 +57,22 @@
     flex: 1 0 2.6rem;
   }
 }
+
+
+div#checkout-so-far {
+  display: grid;
+  grid-template-columns: max-content minmax(0, auto) max-content;
+  align-items: center;
+
+  span.fw {
+    grid-column: 1/4;
+  }
+
+  ul.list-group {
+    margin-bottom: 0;
+
+    li {
+      padding: 10px;
+    }
+  }
+}

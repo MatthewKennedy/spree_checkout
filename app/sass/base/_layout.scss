@@ -12,8 +12,8 @@ body#checkout-page {
 
   @media only screen and (min-width: 1000px) {
     div#checkout-container {
-      grid-template-columns: auto 45% 35% auto;
-      grid-template-rows: 80px min-content min-content min-content 80px;
+      grid-template-columns: auto minmax(300px, 700px) minmax(300px, 600px) auto;
+      grid-template-rows: 80px max-content min-content max-content 80px;
       grid-template-areas:
       ". . . ."
       ". header summary ."

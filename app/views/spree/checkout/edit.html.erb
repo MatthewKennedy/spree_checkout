@@ -11,15 +11,24 @@
     </div>
   <% end %>
 
-  <%= form_with model: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}", class: "row" } do |form| %>
-    <div class=col-12 data-hook=checkout_form_wrapper>
-      <%= form.hidden_field :state_lock_version %>
-      <%= render @order.state, form: form %>
+  <%= render partial: 'spree/checkout/shared/info'%>
+
+  <%= form_with model: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+    <div class=row>
+      <div class=col-12 data-hook=checkout_form_wrapper>
+        <%= form.hidden_field :state_lock_version %>
+        <%= render @order.state, form: form %>
+      </div>
     </div>
 
-    <div class=col-12 data-hook=buttons>
-      <% submit_label_key = @order.confirm? ? :place_order : :save_and_continue %>
-      <%= submit_tag Spree.t(submit_label_key), class: 'btn btn-primary text-uppercase font-weight-bold w-100 checkout-content-save-continue-button' %>
+    <div class="row mt-4">
+      <div class="col-6">
+        <%= yield :back_button %>
+      </div>
+
+      <div class="col-6">
+        <%= yield :proceed_button %>
+      </div>
     </div>
   <% end %>
 </div>

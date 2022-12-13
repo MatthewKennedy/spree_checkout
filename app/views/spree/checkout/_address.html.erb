@@ -54,6 +54,16 @@
   <%= hidden_field_tag 'save_user_address', true, data: { hook: "save_user_address" } %>
 </div>
 
+<% content_for :back_button do %>
+  <%= link_to spree.cart_path, class: 'btn btn-link' do %>
+    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= Spree.t(:return_to_cart) %>
+  <% end %>
+<% end %>
+
+<% content_for :proceed_button do %>
+  <%= submit_tag I18n.t('spree.checkout.continue_to_shipping'), class: 'btn btn-primary w-100' %>
+<% end %>
+
 <% content_for :aside do %>
   <div id="checkout-summary" class="col-md-12 col-lg-auto" data-hook="checkout_summary_box">
     <div class="checkout-summary-container position-sticky">

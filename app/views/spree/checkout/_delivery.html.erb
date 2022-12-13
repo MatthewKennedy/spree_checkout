@@ -1,47 +1,82 @@
-<div id="shipping-method" data-hook>
-  <div data-hook="shipping_method_inner">
-    <div id="methods">
-      <%= form.fields_for :shipments do |ship_form| %>
-        <div class="shipment">
-          <h4 class="text-uppercase checkout-content-header checkout-content-shipping-methods-header mb-1">
-            <%= Spree.t('checkout_page.delivery_method') %>
-          </h4>
-          <div id="shipToLocation" class="mb-4 text-uppercase">
-            <%= Spree.t(:ship_to) %>
-            <span class="text-muted"><%= @order.shipping_address.address1 %></span> -
-              <% if @order.shipping_address.zipcode.present? %> <span class="text-muted"><%= @order.shipping_address.zipcode %></span> - <% end %>
-            <span class="text-muted"><%= @order.shipping_address.country_iso %></span>
-          </div>
+<div id="shipping-methods" data-hook="shipping_method_inner">
+  <%= form.fields_for :shipments do |ship_form| %>
+    <div class="shipment">
+      <h5 class="mb-1">
+        <%= I18n.t('spree.checkout.shipping_method') %>
+      </h5>
 
-          <ul class="checkout-content-shipping-methods-list">
-            <% ship_form.object.shipping_rates.each do |rate| %>
-              <li class="shipping-method">
-                <label class="spree-radio-label">
-                  <%= ship_form.radio_button :selected_shipping_rate_id,
-                    rate.id,
-                    data: {
-                      behavior: 'shipping-method-selector',
-                      cost: rate.display_cost,
-                      tax: rate.display_tax_amount
-                    } %>
-                  <span class="spree-radio-label-custom-input"></span>
-                  <span class="rate-name"><%= rate.name %></span>
-                  <p class="rate-cost"><%= rate.display_cost %></p>
-                </label>
-              </li>
+      <ul class="accordion list-group mb-4">
+        <% ship_form.object.shipping_rates.each do |rate| %>
+          <li class="accordion-item list-group-item ps-5 py-0">
+            <%= ship_form.radio_button :selected_shipping_rate_id, rate.id %>
+
+            <%= ship_form.label :selected_shipping_rate_id, value: rate.id, class: 'd-flex align-items-center p-0 min-h-50px' do %>
+              <div class="flex-fill">
+                <%= rate.name %>
+              </div>
+              <div>
+                <strong><%= rate.display_cost %></strong>
+              </div>
             <% end %>
-          </ul>
-        </div>
-      <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
+  <% end %>
 
-    <% if Spree::Checkout::Config[:shipping_instructions] %>
-      <div id="minstrs" data-hook>
-        <h4 class="h5">
-          <%= Spree.t(:shipping_instructions) %>
-        </h4>
-        <%= form.text_area :special_instructions, cols: 40, rows: 4, class: "form-control" %>
-      </div>
-    <% end %>
-  </div>
+  <% if Spree::Checkout::Config[:shipping_instructions] %>
+    <div>
+      <h5><%= Spree.t(:shipping_instructions) %></h5>
+      <%= form.text_area :special_instructions, cols: 40, rows: 4, class: "form-control" %>
+    </div>
+  <% end %>
 </div>
+
+<% content_for :progress_information do %>
+
+  <div class="text-muted p-2">
+    <%= Spree.t(:contact) %>
+  </div>
+
+  <div class="p-2">
+    <%= @order.email%>
+  </div>
+
+  <div class="text-end p-2">
+    <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+  </div>
+
+    <span class="fw border-top"></span>
+
+  <div class="text-muted p-2 fs-6">
+    <%= Spree.t(:ship_to) %>
+  </div>
+
+  <div class="text-truncate p-2">
+    <%= @order.shipping_address.address1 %>, <%= @order.shipping_address.city %>, <%= @order.shipping_address.zipcode %>, <%= @order.shipping_address.country %>
+  </div>
+
+  <div class="text-end p-2">
+    <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+  </div>
+<% end %>
+
+<% content_for :back_button do %>
+  <%= link_to spree.checkout_state_path('address'), class: 'btn btn-link' do %>
+    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%=  Spree.t(:return_to_address) %>
+  <% end %>
+<% end %>
+
+<% content_for :proceed_button do %>
+  <%= submit_tag I18n.t('spree.checkout.continue_to_payment'), class: 'btn btn-primary w-100' %>
+<% end %>
+
+<% content_for :aside do %>
+  <div id="checkout-summary" class="col-md-12 col-lg-auto" data-hook="checkout_summary_box">
+    <div class="checkout-summary-container position-sticky">
+      <%= render partial: 'summary', locals: { order: @order } %>
+    </div>
+  </div>
+<% end %>
+
+

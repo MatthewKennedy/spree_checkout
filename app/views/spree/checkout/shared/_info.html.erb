@@ -1,0 +1,73 @@
+<div id="checkout-so-far" class="px-3 mb-5 border rounded">
+  <% if @order.state == 'delivery' %>
+    <div class="text-muted p-2">
+      <%= Spree.t(:contact) %>
+    </div>
+
+    <div class="p-2">
+      <%= @order.email%>
+    </div>
+
+    <div class="text-end p-2">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+
+    <span class="fw border-top"></span>
+
+    <div class="text-muted p-2 fs-6">
+      <%= Spree.t(:ship_to) %>
+    </div>
+
+    <div class="text-truncate p-2">
+      <%= @order.shipping_address.address1 %>, <%= @order.shipping_address.city %>, <%= @order.shipping_address.zipcode %>, <%= @order.shipping_address.country %>
+    </div>
+
+    <div class="text-end p-2">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+  <% end %>
+
+  <% if @order.state == 'payment' %>
+    <div class="text-muted p-2">
+      <%= Spree.t(:contact) %>
+    </div>
+
+    <div class="p-2">
+      <%= @order.email%>
+    </div>
+
+    <div class="text-end p-2">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+
+  <span class="fw border-top"></span>
+
+    <div class="text-muted p-2 fs-6">
+      <%= Spree.t(:ship_to) %>
+    </div>
+
+    <div class="text-truncate p-2">
+      <%= @order.billing_address.address1 %>, <%= @order.billing_address.city %>, <%= @order.billing_address.zipcode %>, <%= @order.billing_address.country %>
+    </div>
+
+    <div class="text-end p-2">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+    </div>
+
+  <span class="fw border-top"></span>
+
+    <div class="text-muted p-2">
+      <%= Spree.t(:method) %>
+    </div>
+
+    <div class="p-2">
+      <% @order.shipments.each do |shipment| %>
+      <%= shipment.shipping_method.name %>
+      <% end %>
+    </div>
+
+    <div class="text-end p-2">
+      <%= link_to Spree.t(:change), spree.checkout_state_path('delivery') %>
+    </div>
+  <% end %>
+</div>

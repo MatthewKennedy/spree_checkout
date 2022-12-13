@@ -1,9 +1,6 @@
 en:
   spree:
     checkout:
-      cart_form:
-        reset: Reset
-      cart:
-        remove_item: Remove Item
-        do_you_have_a_promo_code: Do you have a Promo Code?
-        discounts: Discounts
+      shipping_method: Shipping method
+      continue_to_payment: Continue to payment
+      continue_to_shipping: Continue to shipping
