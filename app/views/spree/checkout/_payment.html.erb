@@ -1,30 +1,28 @@
-<div id="payment">
-  <div data-hook="checkout_payment_step">
-    <%= render partial: 'spree/checkout/payment/storecredit' %>
+<div id="payment-methods-container">
+  <%= render partial: 'spree/checkout/payment/storecredit' %>
 
-    <h5 class="mb-1">
-      <%= I18n.t('spree.checkout.payment_method') %>
-    </h5>
+  <h5 class="mb-1">
+    <%= I18n.t('spree.checkout.payment_method') %>
+  </h5>
 
-    <%= form.fields_for :payments_attributes do |payment| %>
-      <ul id=payment-methods class="accordion list-group mb-4">
-        <% checkout_available_payment_methods.each do |payment_method| %>
-          <li class="accordion-item list-group-item ps-5 py-0">
-            <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == checkout_available_payment_methods.first) %>
+  <%= form.fields_for :payments_attributes do |payment| %>
+    <ul id=payment-methods class="accordion list-group mb-4">
+      <% checkout_available_payment_methods.each do |payment_method| %>
+        <li class="accordion-item list-group-item ps-5 py-0">
+          <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == checkout_available_payment_methods.first) %>
 
-            <%= payment.radio_button :payment_method, payment_method.id, checked: is_active_method %>
-            <%= payment.label :payment_method, value: payment_method.id, class: 'd-flex align-items-center p-0 min-h-50px', data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
-              <div class="flex-fill">
-                <%= payment_method.name %>
-              </div>
-            <% end %>
+          <%= payment.radio_button :payment_method, payment_method.id, checked: is_active_method %>
+          <%= payment.label :payment_method, value: payment_method.id, class: 'd-flex align-items-center p-0 min-h-50px', data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
+            <div class="flex-fill">
+              <%= payment_method.name %>
+            </div>
+          <% end %>
 
-            <%= render partial: "spree/checkout/payment/#{payment_method.method_type}", locals: { payment_method: payment_method } %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+          <%= render partial: "spree/checkout/payment/#{payment_method.method_type}", locals: { payment_method: payment_method } %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
 
 <% content_for :back_button do %>
