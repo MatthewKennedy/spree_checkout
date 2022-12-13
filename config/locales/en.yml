@@ -1,6 +1,7 @@
 en:
   spree:
     checkout:
+      payment_method: Payment Method
       shipping_method: Shipping method
       continue_to_payment: Continue to payment
       continue_to_delivery: Continue to shipping
