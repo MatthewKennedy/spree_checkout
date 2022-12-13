@@ -10,6 +10,9 @@ module Spree
       checkout_available_payment_methods.select(&:hosted_checkout?)
     end
 
+    def next_step_name
+    end
+
     def checkout_progress_line(numbers: false)
       states = @order.checkout_steps
       items = states.each_with_index.map do |state, i|
@@ -20,24 +23,24 @@ module Spree
         current_index = states.index(@order.state)
         state_index = states.index(state)
 
-        if state_index < current_index
-          css_classes << 'completed'
-          text = link_to text, checkout_state_path(state)
-        end
-
         css_classes << 'next' if state_index == current_index + 1
         css_classes << 'active' if state == @order.state
         css_classes << 'first' if state_index == 0
         css_classes << 'last' if state_index == states.length - 1
 
         if state_index < current_index
-          content_tag('span', text, class: css_classes.join(' '))
+          css_classes << 'completed'
+          text = link_to text, checkout_state_path(state), class: css_classes.join(' ')
+        end
+
+        if state_index > current_index
+          content_tag('span', text, class: 'cart-progress text-muted')
         else
-          content_tag('span', content_tag('a', text, class: css_classes.join(' ')), class: 'cart-progress')
+          content_tag('span', text, class: 'cart-progress')
         end
       end
-      content_tag(:div,
-                  raw("<span class='cart-progress'><a href='#{spree.cart_path}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join),
+
+      content_tag(:div, raw("<span class='cart-progress'><a href='#{spree.cart_path}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join('')),
                   class: "steps-container text-center step-#{@order.state}", id: 'checkout-steps')
     end
   end

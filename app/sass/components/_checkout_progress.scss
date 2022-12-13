@@ -2,26 +2,24 @@
   span {
     position: relative;
     margin-right: 20px;
+    font-size: 93%;
 
     &::after {
-      content: url('/spree/checkout/chevron-right.svg');
+      content:'';
+      background-image: url('/spree/checkout/chevron-right.svg');
+      background-repeat: no-repeat;
+      background-size: 14px 14px;
       display: inline-block;
       position: absolute;
-      width: 20px;
-      height: 20px;
-      top: 0;
+      width: 14px;
+      height: 14px;
+      top: 3px;
+      right: -18px;
     }
 
     a {
-      color: var(--spree-checkout-link-color);
-
-      &:hover {
-        color: var(--spree-checkout-link-color);
-      }
-
-      &.completed {
-        color: rgb(25,144,198);
-      }
+      text-decoration: var(--spree-checkout-link-text-decleration);
+      font-size: 90%;
     }
   }
 

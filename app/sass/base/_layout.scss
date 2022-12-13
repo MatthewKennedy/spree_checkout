@@ -2,9 +2,12 @@ body#checkout-page {
   padding: 0;
   margin: 0;
 
+  a {
+    text-decoration: var(--spree-checkout-link-text-decleration);
+  }
+
   div#checkout-container {
     display: grid;
-
     margin: 0 !important;
     padding:0 !important;
     height: 100vh;
@@ -12,14 +15,14 @@ body#checkout-page {
 
   @media only screen and (min-width: 1000px) {
     div#checkout-container {
-      grid-template-columns: auto minmax(300px, 700px) minmax(300px, 600px) auto;
-      grid-template-rows: 80px max-content min-content max-content 80px;
-      grid-template-areas:
+      grid-template:
       ". . . ."
       ". header summary ."
       ". main summary ."
       ". footer summary ."
       ". . . .";
+      grid-template-columns: auto minmax(300px, 700px) minmax(300px, 600px) auto;
+      grid-template-rows: 80px max-content min-content max-content 80px;
       gap: 1rem;
 
       &::before {
