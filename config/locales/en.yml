@@ -3,4 +3,5 @@ en:
     checkout:
       shipping_method: Shipping method
       continue_to_payment: Continue to payment
-      continue_to_shipping: Continue to shipping
+      continue_to_delivery: Continue to shipping
+      continue_to_complete: Complete order

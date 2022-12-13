@@ -2,10 +2,6 @@ body#checkout-page {
   padding: 0;
   margin: 0;
 
-  a {
-    text-decoration: var(--spree-checkout-link-text-decleration);
-  }
-
   div#checkout-container {
     display: grid;
     margin: 0 !important;

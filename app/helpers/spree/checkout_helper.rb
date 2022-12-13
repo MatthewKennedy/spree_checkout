@@ -11,6 +11,13 @@ module Spree
     end
 
     def next_step_name
+      states = @order.checkout_steps
+      states.each_with_index.map do |state, i|
+        current_index = states.index(@order.state)
+        state_index = states.index(state)
+
+        return state if state_index == current_index + 1
+      end
     end
 
     def checkout_progress_line(numbers: false)
