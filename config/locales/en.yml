@@ -1,6 +1,10 @@
 en:
   spree:
     checkout:
+      expire_date_format: "Expiration date (MM / YY)"
+      card_varifiction_code: Security code
+      card_number: Card number
+      cardholders_name: Cardholders name
       payment_method: Payment Method
       shipping_method: Shipping method
       continue_to_payment: Continue to payment
@@ -10,3 +14,4 @@ en:
       return_to_address: Return to address
       return_to_payment: Return to payment
       return_to_delivery: Return to shipping
+      ship_to: Ship to

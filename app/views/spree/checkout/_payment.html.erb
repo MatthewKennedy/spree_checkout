@@ -7,18 +7,27 @@
 
   <%= form.fields_for :payments_attributes do |payment| %>
     <ul id=payment-methods class="accordion list-group mb-4">
-      <% checkout_available_payment_methods.each do |payment_method| %>
-        <li class="accordion-item list-group-item p-0 m-0">
-          <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == checkout_available_payment_methods.first) %>
+      <% checkout_available_payment_methods.each_with_index do |payment_method, index| %>
+        <% if index == 0 %>
+          <% show_first = true %>
+          <% show_container = 'show' %>
+        <% else %>
+          <% show_first = false %>
+          <% show_container = '' %>
+        <% end %>
+        <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == checkout_available_payment_methods.first) %>
 
+        <li class="accordion-item list-group-item p-0 m-0">
           <%= payment.radio_button :payment_method, payment_method.id, checked: is_active_method %>
-          <%= payment.label :payment_method, value: payment_method.id, class: 'd-flex align-items-center ps-5 p-0 min-h-50px', data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
+          <%= payment.label :payment_method, value: payment_method.id, class: 'd-flex align-items-center ps-5 p-0 min-h-50px', aria: {expanded: show_first } ,data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
             <div class="flex-fill">
               <%= payment_method.name %>
             </div>
           <% end %>
 
-          <%= render partial: "spree/checkout/payment/#{payment_method.method_type}", locals: { payment_method: payment_method } %>
+          <div id="payment-method-container-<%= payment_method.id %>" class="accordion-collapse collapse <%= show_container %>" data-bs-parent="#payment-methods">
+            <%= render partial: "spree/checkout/payment/#{payment_method.method_type}", locals: { payment_method: payment_method } %>
+          </div>
         </li>
       <% end %>
     </ul>
@@ -36,9 +45,9 @@
 <% end %>
 
 <% content_for :aside do %>
-  <div id="checkout-summary" class="col-md-12 col-lg-auto" data-hook="checkout_summary_box">
-    <div class="checkout-summary-container position-sticky">
-      <%= render partial: 'summary', locals: { order: @order } %>
+  <div id="checkout-summary" class=position-sticky data-hook="checkout_summary_box" style="top: 80px;">
+    <div class="checkout-summary-container">
+      <%= render partial: 'spree/checkout/shared/summary', locals: { order: @order } %>
     </div>
   </div>
 <% end %>
