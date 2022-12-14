@@ -8,11 +8,11 @@
   <%= form.fields_for :payments_attributes do |payment| %>
     <ul id=payment-methods class="accordion list-group mb-4">
       <% checkout_available_payment_methods.each do |payment_method| %>
-        <li class="accordion-item list-group-item ps-5 py-0">
+        <li class="accordion-item list-group-item p-0 m-0">
           <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == checkout_available_payment_methods.first) %>
 
           <%= payment.radio_button :payment_method, payment_method.id, checked: is_active_method %>
-          <%= payment.label :payment_method, value: payment_method.id, class: 'd-flex align-items-center p-0 min-h-50px', data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
+          <%= payment.label :payment_method, value: payment_method.id, class: 'd-flex align-items-center ps-5 p-0 min-h-50px', data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
             <div class="flex-fill">
               <%= payment_method.name %>
             </div>
@@ -26,8 +26,8 @@
 </div>
 
 <% content_for :back_button do %>
-  <%= link_to spree.cart_path, class: 'btn btn-link' do %>
-    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= Spree.t(:return_to_cart) %>
+  <%= link_to spree.checkout_state_path(previous_step_name), class: 'btn btn-link' do %>
+    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= I18n.t("spree.checkout.return_to_#{previous_step_name}") %>
   <% end %>
 <% end %>
 

@@ -4,19 +4,23 @@ body#checkout-page {
 
   div#checkout-container {
     display: grid;
-    height: auto;
-    overflow:hidden;
-    margin: 0 !important;
-    padding-top:0 !important;
   }
 
-  @media only screen and (min-width: 1000px) {
+  header,
+  main,
+  footer {
+    margin: auto;
+  }
+
+  @media only screen and (min-width: 950px) {
     div#checkout-container {
+      padding: 0 !important;
+      margin: 0 !important;
       grid-template:
       ". header . summary ."
       ". main   . summary ."
       ". footer . summary .";
-      grid-template-columns: auto minmax(300px, 700px) 0 minmax(300px, 600px) auto;
+      grid-template-columns: auto 640px 0 560px auto;
       grid-template-rows: max-content max-content min-content;
       column-gap: 2rem;
 

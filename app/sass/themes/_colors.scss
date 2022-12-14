@@ -10,6 +10,9 @@
   }
 }
 
+aside {
+  background-color: var(--spree-checkout-aside-bg);
+}
 
 @media only screen and (min-width: 1000px) {
    div#checkout-container {
