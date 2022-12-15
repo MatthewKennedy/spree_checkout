@@ -65,9 +65,5 @@
 <% end %>
 
 <% content_for :aside do %>
-  <div id="checkout-summary" class="col-md-12 col-lg-auto" data-hook="checkout_summary_box">
-    <div class="checkout-summary-container position-sticky">
-      <%= render partial: 'summary', locals: { order: @order } %>
-    </div>
-  </div>
+  <%= render partial: 'spree/checkout/shared/summary', locals: { order: @order } %>
 <% end %>

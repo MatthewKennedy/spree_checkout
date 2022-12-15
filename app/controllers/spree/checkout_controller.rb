@@ -64,6 +64,24 @@ module Spree
       end
     end
 
+    def apply_coupon
+      current_order.coupon_code = params[:order][:coupon_code]
+      @result = coupon_handler.new(current_order).apply
+
+      respond_with(@order) do |format|
+        format.turbo_stream { render :update_summary }
+      end
+    end
+
+    def remove_coupon
+      current_order.coupon_code = params[:code]
+      @result = coupon_handler.new(current_order).remove(params[:code])
+
+      respond_with(@order) do |format|
+        format.turbo_stream { render :update_summary }
+      end
+    end
+
     private
 
     def unknown_state?
@@ -156,7 +174,10 @@ module Spree
       # if the user has a default address, a callback takes care of setting
       # that; but if he doesn't, we need to build an empty one here
       @order.bill_address ||= Address.new(country: current_store.default_country, user: try_spree_current_user)
-      @order.ship_address ||= Address.new(country: current_store.default_country, user: try_spree_current_user) if @order.checkout_steps.include?('delivery')
+      if @order.checkout_steps.include?('delivery')
+        @order.ship_address ||= Address.new(country: current_store.default_country,
+                                            user: try_spree_current_user)
+      end
 
       @bill_address ||= @order.bill_address
       @ship_address ||= @order.ship_address
@@ -228,6 +249,10 @@ module Spree
 
     def update_country_params
       params.fetch(:order, {}).permit(permitted_order_attributes)
+    end
+
+    def coupon_handler
+      Spree::PromotionHandler::Coupon
     end
   end
 end

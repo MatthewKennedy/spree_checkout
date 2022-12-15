@@ -1,3 +1,4 @@
+<%# SUBTOTAL %>
 <div id="subtotal" class="d-flex my-1" data-hook="order_summary">
   <div class="text-left flex-fill">
     <%= Spree.t(:subtotal) %>
@@ -7,50 +8,40 @@
   </div>
 </div>
 
-<% if order.line_item_adjustments.nonzero.promotion.exists? || order.adjustments.nonzero.eligible.exists? %>
-  <div class="d-flex my-1" data-hook="order_summary">
-    <% if order.line_item_adjustments.nonzero.promotion.exists? %>
-      <% order.line_item_adjustments.nonzero.eligible.each do |adjustment| %>
-      <% next if (adjustment.source_type == 'Spree::TaxRate') || (adjustment.amount == 0) %>
-        <div class="flex-fill">
-          <%= link_to Spree.t(:remove_promotion).html_safe, remove_coupon_path(id: adjustment.id), class: "remove_coupon", method: :delete, remote: true %>
-          <%= adjustment.label %>
-        </div>
+<%# PROMOTIONS %>
+<% if @order.line_item_adjustments.nonzero.promotion.exists? %>
+  <div class="d-flex my-1">
+    <div class="flex-fill">
+      <%= I18n.t('spree.checkout.discount') %>
+    </div>
 
-        <div class="text-end">
-          <%= adjustment.display_amount %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <% if order.using_store_credit? %>
-      <div class="flex-fill">
-        <strong><%= Spree.t(:store_credit_name) %>:</strong>
-      </div>
-      <div class="text-end">
-        <span id='summary-store-credit'><%= order.display_total_applied_store_credit %></span>
-      </div>
-    <% end %>
+    <div class="text-end">
+      <%= compact_promotion(@order)[:total] %>
+    </div>
   </div>
 <% end %>
 
 
+<%# SHIPPING %>
 <% if order.shipments.any? %>
   <div class="d-flex my-1" data-hook="order_summary">
+    <% if order.shipment_adjustments.promotion.exists? %>
+      <% shipping_total = I18n.t('spree.checkout.free') %>
+    <% else %>
+      <% shipping_total = Spree::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency) %>
+    <% end %>
+
     <div class="flex-fill">
       <%= Spree.t(:shipping) %>
     </div>
 
-    <% if order.shipment_adjustments.promotion.exists? %>
-      <% shipping_total = 'FREE' %>
-      <div class="text-end"><%= shipping_total %></div>
-    <% else %>
-      <% shipping_total = Spree::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency) %>
-      <div class="text-end" data-hook='shipping-total' data-currency='<%= Money::Currency.find(order.currency).symbol %>' thousands-separator='<%= shipping_total.thousands_separator %>' decimal-mark='<%= shipping_total.decimal_mark %>'><%= shipping_total %></div>
-    <% end %>
+    <div class="text-end">
+      <%= shipping_total %>
+    </div>
   </div>
 <% end %>
 
+<%# TAX %>
 <% if order.line_item_adjustments.nonzero.tax.exists? %>
   <div class="d-flex my-1" data-hook="order_summary">
     <% order.all_adjustments.nonzero.tax.eligible.each do |added_tax| %>
@@ -66,6 +57,7 @@
 
 <hr>
 
+<%# TOTAL %>
 <div id="order-total-line" class="d-flex">
   <div class="flex-fill">
     <span class="fs-4"><%= Spree.t(:total) %></span>

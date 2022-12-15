@@ -11,7 +11,11 @@
       </header>
 
       <aside>
-        <%= yield :aside %>
+        <% if content_for :aside %>
+          <div id="checkout-summary" class=position-sticky data-hook="checkout_summary_box" style="top: 80px;">
+            <%= yield :aside %>
+          </div>
+        <% end %>
       </aside>
 
       <main>

@@ -1,5 +1,13 @@
 :root {
   body {
+    .btn {
+      --bs-btn-padding-y: 1rem;
+    }
+
+    .bg-dark{
+      --bs-bg-opacity: 0.65;
+    }
+
     --spree-checkout-aside-bg: #fafafa;
     --spree-checkout-border-color: #d7dcde;
     --spree-checkout-border-radius: 5px;

@@ -8,14 +8,21 @@ div#cart-line-items {
   margin: 0 0 15px;
 
   .checkout-product-image {
-  width: 5em;
-  height: 5em;
-  border-radius: 8px;
-  background: #fff;
-  position: relative;
-  border:1px solid var(--spree-checkout-border-color);
-  padding: 3px;
-  margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    width: 5em;
+    height: 5em;
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+    border:1px solid var(--spree-checkout-border-color);
+    padding: 3px;
+    margin: 5px 0;
+
+    .product-image-container {
+      display: flex;
+      align-self: center;
+    }
   }
 
   .product-thumbnail-quantity {
