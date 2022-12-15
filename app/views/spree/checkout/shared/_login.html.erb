@@ -1,0 +1,39 @@
+<h5>
+  <%= Spree.t(:log_in_to_continue) %>
+</h5>
+
+<%= form_for Spree.user_class.new, as: :spree_user, url: spree_login_path, data: { turbo: false } do |f| %>
+  <div id="password-credentials">
+    <div class="mb-3 form-floating">
+      <%= f.email_field :email, class: 'form-control', placeholder: Spree.t(:email), value: params.dig(:spree_user, :email) %>
+      <%= f.label :email, Spree.t(:email) %>
+    </div>
+    <div class="form-floating mb-3">
+      <%= f.password_field :password, class: 'form-control', placeholder: Spree.t(:password) %>
+      <%= f.label :password, Spree.t(:password) %>
+    </div>
+  </div>
+
+  <% if Spree::Frontend::Config[:remember_me_enabled] %>
+    <div class="form-check mb-3">
+      <%= f.check_box :remember_me, class: 'form-check-input' %>
+      <%= f.label :remember_me, Spree.t(:remember_me), class: 'form-check-label' %>
+    </div>
+  <% end %>
+
+  <div class="d-flex mb-3">
+    <div class=me-2>
+       <%= f.submit Spree.t(:sign_up), class: 'btn btn-outline-secondary' %>
+    </div>
+    <div class='flex-fill ms-2'>
+       <%= f.submit Spree.t(:login), class: 'btn btn-primary w-100' %>
+    </div>
+  </div>
+
+<% end %>
+
+<% if spree.respond_to?(:recover_password_path) %>
+  <div class="text-end">
+    <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
+  </div>
+<% end %>

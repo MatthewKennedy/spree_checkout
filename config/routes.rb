@@ -6,5 +6,6 @@ Spree::Core::Engine.add_routes do
     get   '/checkout/:state', to: 'checkout#edit', as: :checkout_state
     get   '/checkout', to: 'checkout#edit', as: :checkout
     post  '/checkout/update_country', to: 'checkout#update_country', as: :update_country
+    patch  '/checkout/update_shipping_choice', to: 'checkout#update_shipping_choice'
   end
 end

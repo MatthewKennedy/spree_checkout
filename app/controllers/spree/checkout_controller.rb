@@ -68,6 +68,8 @@ module Spree
       current_order.coupon_code = params[:order][:coupon_code]
       @result = coupon_handler.new(current_order).apply
 
+      @order.update_with_updater!
+
       respond_with(@order) do |format|
         format.turbo_stream { render :update_summary }
       end
@@ -77,8 +79,22 @@ module Spree
       current_order.coupon_code = params[:code]
       @result = coupon_handler.new(current_order).remove(params[:code])
 
+      @order.update_with_updater!
+
       respond_with(@order) do |format|
         format.turbo_stream { render :update_summary }
+      end
+    end
+
+    def update_shipping_choice
+      if @order.update_from_params(params, permitted_checkout_attributes, request.headers.env)
+        @order.update_with_updater!
+
+        respond_with(@order) do |format|
+          format.turbo_stream { render :update_summary }
+        end
+      else
+        render :edit, status: :unprocessable_entity
       end
     end
 

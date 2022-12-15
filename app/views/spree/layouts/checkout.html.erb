@@ -7,23 +7,45 @@
   <body id=checkout-page>
     <div id=checkout-container>
       <header>
-        <%= render partial: 'spree/checkout/shared/header' %>
+        <div class=container>
+          <div class=row>
+            <div class=col-12>
+              <%= render partial: 'spree/checkout/shared/header' %>
+            </div>
+          </div>
+        </div>
       </header>
 
       <aside>
-        <% if content_for :aside %>
-          <div id="checkout-summary" class=position-sticky data-hook="checkout_summary_box" style="top: 80px;">
-            <%= yield :aside %>
+        <div class=container>
+          <div class=row>
+            <div class=col-12>
+              <div id="checkout-summary" class=position-sticky data-hook="checkout_summary_box" style="top: 80px;">
+                <%= render partial: 'spree/checkout/shared/summary', locals: { order: @order } %>
+              </div>
+            </div>
           </div>
-        <% end %>
+        </div>
       </aside>
 
       <main>
-        <%= yield %>
+        <div class=container>
+          <div class=row>
+            <div class=col-12>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
       </main>
 
       <footer>
-        <%= render 'spree/shared/copyright' %>
+        <div class=container>
+          <div class=row>
+            <div class=col-12>
+              <%= render 'spree/shared/copyright' %>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
 

@@ -1,35 +1,33 @@
-<div data-hook="checkout_content" style="width: 640px;">
-  <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+<%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
 
-  <% if express_checkout_payment_methods.any? %>
-    <div id=express-checkouts>
-      <div class=notation-bar>Express Checkout</div>
-        <% express_checkout_payment_methods.each do |express_checkout| %>
-          <%= express_checkout.name %>
-        <% end %>
-      <div class=notation-bar>or</div>
+<% if express_checkout_payment_methods.any? %>
+  <div id=express-checkouts>
+    <div class=notation-bar>Express Checkout</div>
+      <% express_checkout_payment_methods.each do |express_checkout| %>
+        <%= express_checkout.name %>
+      <% end %>
+    <div class=notation-bar>or</div>
+  </div>
+<% end %>
+
+<%= render partial: 'spree/checkout/shared/info'%>
+
+<%= form_with model: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+  <div class=row>
+    <div class=col-12 data-hook=checkout_form_wrapper>
+      <%= form.hidden_field :state_lock_version %>
+      <%= render @order.state, form: form %>
     </div>
-  <% end %>
+  </div>
 
-  <%= render partial: 'spree/checkout/shared/info'%>
-
-  <%= form_with model: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
-    <div class=row>
-      <div class=col-12 data-hook=checkout_form_wrapper>
-        <%= form.hidden_field :state_lock_version %>
-        <%= render @order.state, form: form %>
-      </div>
+  <div class="row mt-4">
+    <div class="col-6">
+      <%= yield :back_button %>
     </div>
 
-    <div class="row mt-4">
-      <div class="col-6">
-        <%= yield :back_button %>
-      </div>
-
-      <div class="col-6">
-        <%= yield :proceed_button %>
-      </div>
+    <div class="col-6">
+      <%= yield :proceed_button %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
