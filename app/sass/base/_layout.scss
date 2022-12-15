@@ -12,6 +12,15 @@ body#checkout-page {
     margin: auto;
   }
 
+  main {
+     border-top: 1px solid var(--spree-checkout-border-color);
+  }
+
+  aside {
+    border-bottom: 1px solid var(--spree-checkout-border-color);
+    margin-bottom:2em;
+  }
+
   @media only screen and (min-width: 950px) {
     div#checkout-container {
       padding: 0 !important;
@@ -44,6 +53,7 @@ body#checkout-page {
     }
 
     aside {
+      border-bottom: none;
       padding-top: 80px;
       grid-area: summary;
       grid-row: 1 / 4;
@@ -51,6 +61,7 @@ body#checkout-page {
     }
 
     main {
+      border-top: none;
       padding-top: 1rem;
       padding-bottom: 2rem;
       grid-area: main;
