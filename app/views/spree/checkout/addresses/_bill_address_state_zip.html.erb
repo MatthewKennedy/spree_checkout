@@ -1,7 +1,7 @@
 <%= fields_for :order, @order do |ord| %>
   <%= ord.fields_for :bill_address do |f| %>
     <% if @order.bill_address.country.states_required? || @order.bill_address.country.states.present? %>
-      <div class="form-group form-floating">
+      <div class="form-floating mb-3">
         <% if !@order.bill_address.country.states.present? && @order.bill_address.country.states_required? %>
           <%= f.text_field :state_name, required: true, class: 'form-control', placeholder: raw(state_label(@order.bill_address.country) + required_span_tag(@order.bill_address.country.states_required?)) %>
         <% elsif @order.bill_address.country.states.present? %>
@@ -11,7 +11,7 @@
       </div>
     <% end %>
 
-    <div class="form-group form-floating">
+    <div class="form-floating mb-3">
       <%= f.text_field :zipcode, required: @order.bill_address.country.zipcode_required?, class: 'form-control', placeholder: (raw(zipcode_label(@order.bill_address.country)) + required_span_tag(@order.bill_address.country.zipcode_required?)) %>
       <%= f.label :zipcode, (raw(zipcode_label(@order.bill_address.country)) + required_span_tag(@order.bill_address.country.zipcode_required?)) %>
     </div>

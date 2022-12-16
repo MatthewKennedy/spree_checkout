@@ -54,8 +54,8 @@ module Spree
       @order = Spree::Order.new(update_country_params)
 
       # Empty out the zipcode and State on Country change.
-      # @order.zipcode = nil
-      # @order.state = nil
+      @order.send(params[:address_kind]).zipcode = nil
+      @order.send(params[:address_kind]).state = nil
 
       @address_partial = "#{params[:address_kind]}_state_zip"
 
