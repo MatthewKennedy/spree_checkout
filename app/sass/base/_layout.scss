@@ -40,12 +40,14 @@ body#checkout-page {
         content: "";
         grid-column: 1 / 4;
         grid-row: 1 / 6;
+        min-height: 100vh;
       }
 
       &::after {
         content: "";
         grid-column: 3 / 6;
         grid-row: 1 / 4;
+        min-height: 100vh;
       }
     }
 
@@ -60,7 +62,6 @@ body#checkout-page {
       padding-top: 80px;
       grid-area: summary;
       grid-row: 1 / 4;
-      min-height: 100vh;
     }
 
     main {
