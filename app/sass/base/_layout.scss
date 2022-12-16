@@ -6,12 +6,6 @@ body#checkout-page {
     display: grid;
   }
 
-  header,
-  main,
-  footer {
-    margin: auto;
-  }
-
   aside {
     border-top: 1px solid var(--spree-checkout-border-color);
     border-bottom: 1px solid var(--spree-checkout-border-color);
