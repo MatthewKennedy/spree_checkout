@@ -22,15 +22,15 @@ aside {
   background-color: var(--spree-checkout-aside-bg);
 }
 
-@media only screen and (min-width: 1000px) {
-   div#checkout-container {
-    &::before {
-      background-color: var(--bs-body-bg);
-    }
-
-    &::after {
-      border-left: 1px solid  var(--spree-checkout-border-color);
-      background-color: var(--spree-checkout-aside-bg);
-    }
+@include media-breakpoint-up(lg) {
+  div#checkout-container {
+   &::before {
+     background-color: var(--bs-body-bg);
    }
+
+   &::after {
+     border-left: 1px solid  var(--spree-checkout-border-color);
+     background-color: var(--spree-checkout-aside-bg);
+   }
+  }
 }

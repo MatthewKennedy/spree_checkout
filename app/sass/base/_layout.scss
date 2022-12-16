@@ -12,16 +12,19 @@ body#checkout-page {
     margin: auto;
   }
 
-  main {
-     border-top: 1px solid var(--spree-checkout-border-color);
-  }
-
   aside {
+    border-top: 1px solid var(--spree-checkout-border-color);
     border-bottom: 1px solid var(--spree-checkout-border-color);
     margin-bottom:2em;
   }
 
-  @media only screen and (min-width: 950px) {
+  @include media-breakpoint-up(lg) {
+    #checkout-summary {
+      .collapse:not(.show) {
+        display: block;
+      }
+    }
+
     div#checkout-container {
       padding: 0 !important;
       margin: 0 !important;
@@ -29,7 +32,7 @@ body#checkout-page {
       ". header . summary ."
       ". main   . summary ."
       ". footer . summary .";
-      grid-template-columns: auto 640px 0 560px auto;
+      grid-template-columns: auto minmax(350px, 640px) 0 minmax(350px, 560px)  auto;
       grid-template-rows: max-content max-content min-content;
       column-gap: 2rem;
 
