@@ -8,7 +8,7 @@ module Spree
       include Spree::Core::ControllerHelpers::Locale
       include Spree::Core::ControllerHelpers::Currency
       include Spree::Core::ControllerHelpers::Order
-      include Spree::LocaleUrls
+      include Spree::Checkout::LocaleUrls
 
       respond_to :html
 
