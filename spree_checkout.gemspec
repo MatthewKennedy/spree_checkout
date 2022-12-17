@@ -27,8 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_api', ">= #{s.version}"
   s.add_dependency 'spree_core', ">= #{s.version}"
 
-  s.add_dependency 'babel-transpiler'
-  s.add_dependency 'canonical-rails'
   s.add_dependency 'inline_svg'
   s.add_dependency 'responders'
   s.add_dependency 'turbo-rails'
