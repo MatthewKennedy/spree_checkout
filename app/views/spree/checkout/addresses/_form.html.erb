@@ -1,60 +1,61 @@
 <% address_id = address_type.chars.first %>
 
-<div class="inner" data-hook='<%= "#{address_type}_inner" %>'>
+<div data-hook='<%= "#{address_type}_inner" %>'>
   <div class=row>
     <div class="col-12 col-md-6">
-      <div class="form-floating mb-3" id='<%= "#{address_id}firstname" %>'>
+      <div class="form-floating mb-3">
           <%= form.text_field :firstname, class: 'form-control', required: true, placeholder: Spree.t(:first_name) %>
+
           <%= form.label :firstname do %>
-            <%= Spree.t(:first_name) %> <abbr class="required" title="required">*</abbr>
+            <%= Spree.t(:first_name) %> <abbr class=required title=required>*</abbr>
           <% end %>
       </div>
     </div>
 
     <div class="col-12 col-md-6">
-      <div class="form-floating mb-3" id='<%= "#{address_id}lastname" %>'>
+      <div class="form-floating mb-3">
         <%= form.text_field :lastname, class: 'form-control', required: true, placeholder: Spree.t(:last_name) %>
 
         <%= form.label :lastname do %>
-          <%= Spree.t(:last_name) %> <abbr class="required" title="required">*</abbr>
+          <%= Spree.t(:last_name) %> <abbr class=required title=required>*</abbr>
         <% end %>
       </div>
     </div>
   </div>
 
   <% if Spree::Config[:company] %>
-    <div class="form-floating mb-3" id='<%= "#{address_id}company" %>'>
+    <div class="form-floating mb-3">
       <%= form.text_field :company, class: 'form-control', placeholder: Spree.t(:company) %>
       <%= form.label :company, Spree.t(:company) %>
     </div>
   <% end %>
 
-  <div class="form-floating mb-3" id='<%= "#{address_id}address1" %>'>
+  <div class="form-floating mb-3">
     <%= form.text_field :address1, class: 'form-control required', placeholder: Spree.t(:street_address) %>
 
     <%= form.label :address1 do %>
-      <%= Spree.t(:street_address) %> <abbr class="required" title="required">*</abbr>
+      <%= Spree.t(:street_address) %> <abbr class=required title=required>*</abbr>
     <% end %>
   </div>
 
-  <div class="form-floating mb-3" id='<%= "#{address_id}address2" %>'>
+  <div class="form-floating mb-3">
     <%= form.text_field :address2, class: 'form-control', placeholder: Spree.t(:street_address_2) %>
     <%= form.label :address2, Spree.t(:street_address_2) %>
   </div>
 
-  <div class="form-floating mb-3" id='<%= "#{address_id}city" %>'>
+  <div class="form-floating mb-3">
     <%= form.text_field :city, class: 'form-control', required: true, placeholder: Spree.t(:city) %>
 
     <%= form.label :city do %>
-      <%= Spree.t(:city) %><abbr class="required" title="required">*</abbr>
+      <%= Spree.t(:city) %> <abbr class=required title=required>*</abbr>
     <% end %>
   </div>
 
-  <div class="form-floating mb-3" id='<%= "#{address_id}country" %>'>
+  <div class="form-floating mb-3">
     <%= form.collection_select :country_id, available_countries, :id, :name, { }, { class: 'form-select', data: { action: 'form--validation#validate' } } %>
 
     <%= form.label :country_id do %>
-      <%= Spree.t(:country) %><abbr class="required" title="required">*</abbr>
+      <%= Spree.t(:country) %> <abbr class=required title=required>*</abbr>
     <% end %>
   </div>
 
@@ -62,16 +63,16 @@
     <%= render partial: "spree/checkout/addresses/#{address_name}_state_zip" %>
   </div>
 
-  <div class="form-floating mb-3" id='<%= "#{address_id}phone" %>'>
+  <div class="form-floating mb-3">
     <%= form.phone_field :phone, class: 'form-control', required: address.require_phone?, placeholder: Spree.t(:phone) %>
 
     <%= form.label :phone do %>
-      <%= Spree.t(:phone) %><% if address.require_phone? %><abbr class="required" title="required">*</abbr><% end %>
+      <%= Spree.t(:phone) %> <% if address.require_phone? %><abbr class=required title=required>*</abbr><% end %>
     <% end %>
   </div>
 
   <% if Spree::Config[:alternative_shipping_phone] %>
-    <div class="form-floating mb-3" id='<%= "#{address_id}altphone" %>'>
+    <div class="form-floating mb-3">
       <%= form.phone_field :alternative_phone, class: 'form-control', placeholder: Spree.t(:alternative_phone) %>
       <%= form.label :alternative_phone, Spree.t(:alternative_phone) %>
     </div>

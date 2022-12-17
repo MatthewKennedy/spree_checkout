@@ -14,10 +14,12 @@ Spree::Core::Engine.add_routes do
 
       root                            to: 'orders#edit'
       get   '/:state',                to: 'orders#edit', as: :state
+
       patch 'update/:state',          to: 'orders#update'
       patch 'apply_coupon',           to: 'orders#apply_coupon'
       patch 'remove_coupon/:code',    to: 'orders#remove_coupon', as: :remove_coupon
       patch 'update_shipping_choice', to: 'orders#update_shipping_choice'
+
       post  'change_address_country', to: 'orders#change_address_country'
     end
   end
