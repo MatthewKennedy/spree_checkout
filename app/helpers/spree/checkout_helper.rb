@@ -1,13 +1,66 @@
 module Spree
   module CheckoutHelper
+    def spree_checkout_available_payment_methods
+      @spree_checkout_available_payment_methods ||= @order.available_payment_methods
+    end
+
+    def spree_checkout_product_images(product, variants)
+      if product.variants_and_option_values(current_currency).any?
+        variants_without_master_images = variants.reject(&:is_master).map(&:images).flatten
+
+        if variants_without_master_images.any?
+          return variants_without_master_images
+        end
+      end
+
+      variants.map(&:images).flatten
+    end
+
+    def spree_checkout_flash_messages(opts = {})
+      flashes = ''
+      excluded_types = opts[:excluded_types].to_a.map(&:to_s)
+
+      flash.to_h.except('order_completed').each do |msg_type, text|
+        next if msg_type.blank? || excluded_types.include?(msg_type)
+
+        flashes << content_tag(:div, class: "alert alert-#{class_for(msg_type)} mb-0") do
+          content_tag(:button, '&times;'.html_safe, class: 'close', data: { dismiss: 'alert', hidden: true }) +
+            content_tag(:span, text)
+        end
+      end
+      flashes.html_safe
+    end
+
     def spree_checkout_svg_tag(file_name, options = {})
       prefixed_file = "spree/checkout/#{file_name}"
 
       inline_svg_tag(prefixed_file, options)
     end
 
+    def spree_checkout_logo(image_path = nil, options = {})
+      logo_attachment = if defined?(Spree::StoreLogo) && current_store.logo.is_a?(Spree::StoreLogo)
+                          current_store.logo.attachment # Spree v5
+                        else
+                          current_store.logo # Spree 4.x
+                        end
+
+      image_path ||= if logo_attachment&.attached? && logo_attachment&.variable?
+                       main_app.cdn_image_url(logo_attachment.variant(resize: '244x104>'))
+                     elsif logo_attachment&.attached? && logo_attachment&.image?
+                       main_app.cdn_image_url(current_store.logo)
+                     else
+                       asset_path('spree/checkout/spree-logo.svg')
+                     end
+
+      path = spree.respond_to?(:checkout_root_path) ? spree.checkout_root_path : main_app.checkout_root_path
+
+      link_to path, 'aria-label': current_store.name, method: options[:method] do
+        image_tag image_path, alt: current_store.name, title: current_store.name
+      end
+    end
+
     def express_checkout_payment_methods
-      checkout_available_payment_methods.select(&:hosted_checkout?)
+      spree_checkout_available_payment_methods.select(&:hosted_checkout?)
     end
 
     def compact_promotion(order)

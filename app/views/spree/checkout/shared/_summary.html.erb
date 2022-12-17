@@ -23,7 +23,9 @@
             <% variant = item.variant %>
             <% if variant.images.length == 0 %>
               <span class="product-thumbnail-quantity" aria-hidden="true"><%= item.quantity %></span>
-              <%= product_image(variant) %>
+
+              <%#= image_tag main_app.cdn_image_url(variant.url(:large)), width: '100', height: '100', loading: :lazy, class: "w-100 h-100 lazy" %>
+              <%#= product_image(variant) %>
             <% end %>
           </div>
 
@@ -46,7 +48,7 @@
         <% end %>
       </div>
 
-      <% if Spree::Frontend::Config[:coupon_codes_enabled] %>
+      <% if Spree::Checkout::Config[:coupon_codes_enabled] %>
         <hr>
 
         <%= form_with model: @order, url: spree.checkout_apply_coupon_path do |form| %>

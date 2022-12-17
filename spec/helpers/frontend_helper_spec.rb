@@ -7,21 +7,21 @@ module Spree
       let(:flash) { { 'notice' => 'ok', 'error' => 'foo', 'warning' => 'bar' } }
 
       it 'outputs all flash content' do
-        messages = flash_messages
+        messages = spree_checkout_flash_messages
         expect(messages).to have_css ".alert-#{class_for('notice')}", text: 'ok'
         expect(messages).to have_css ".alert-#{class_for('error')}", text: 'foo'
         expect(messages).to have_css ".alert-#{class_for('warning')}", text: 'bar'
       end
 
       it 'outputs flash content except one key' do
-        messages = flash_messages(excluded_types: [:warning])
+        messages = spree_checkout_flash_messages(excluded_types: [:warning])
         expect(messages).to have_css ".alert-#{class_for('notice')}", text: 'ok'
         expect(messages).to have_css ".alert-#{class_for('error')}", text: 'foo'
         expect(messages).not_to have_css ".alert-#{class_for('warning')}", text: 'bar'
       end
 
       it 'outputs flash content except some keys' do
-        messages = flash_messages(excluded_types: [:error, :warning])
+        messages = spree_checkout_flash_messages(excluded_types: [:error, :warning])
         expect(messages).to have_css ".alert-#{class_for('notice')}", text: 'ok'
         expect(messages).not_to have_css ".alert-#{class_for('error')}", text: 'foo'
         expect(messages).not_to have_css ".alert-#{class_for('warning')}", text: 'bar'

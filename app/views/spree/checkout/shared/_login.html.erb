@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <% if Spree::Frontend::Config[:remember_me_enabled] %>
+  <% if Spree::Checkout::Config[:remember_me_enabled] %>
     <div class="form-check mb-3">
       <%= f.check_box :remember_me, class: 'form-check-input' %>
       <%= f.label :remember_me, Spree.t(:remember_me), class: 'form-check-label' %>

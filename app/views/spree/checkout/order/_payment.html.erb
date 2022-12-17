@@ -7,7 +7,7 @@
 
   <%= form.fields_for :payments_attributes do |payment| %>
     <ul id=payment-methods class="accordion list-group mb-4">
-      <% checkout_available_payment_methods.each_with_index do |payment_method, index| %>
+      <% spree_checkout_available_payment_methods.each_with_index do |payment_method, index| %>
         <% if index == 0 %>
           <% show_first = true %>
           <% show_container = 'show' %>
@@ -15,7 +15,7 @@
           <% show_first = false %>
           <% show_container = '' %>
         <% end %>
-        <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == checkout_available_payment_methods.first) %>
+        <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == spree_checkout_available_payment_methods.first) %>
 
         <li class="accordion-item list-group-item p-0 m-0">
           <%= payment.radio_button :payment_method, payment_method.id, checked: is_active_method %>

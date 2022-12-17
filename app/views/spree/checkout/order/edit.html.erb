@@ -1,4 +1,4 @@
-<%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+<%= render partial: 'spree/checkout/shared/error_messages', locals: { target: @order } %>
 
 <% if express_checkout_payment_methods.any? %>
   <div id=express-checkouts>
@@ -12,7 +12,7 @@
 
 <%= render partial: 'spree/checkout/shared/info'%>
 
-<%= form_with model: @order, url: spree.update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+<%= form_with model: @order, url: spree.checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
   <div class=row>
     <div class=col-12 data-hook=checkout_form_wrapper>
       <%= form.hidden_field :state_lock_version %>
@@ -30,4 +30,3 @@
     </div>
   </div>
 <% end %>
-
