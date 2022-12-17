@@ -14,21 +14,33 @@
     <% address_name = "#{address_type[0...4]}_address" %>
 
     <div class="col-12 my-4" data-hook="<%= address_type %>_fieldset_wrapper" data-controller='form--validation'>
-      <h5>
-        <%= Spree.t(address_type + '_address') %>
-      </h5>
+      <div class=d-flex>
+        <div class=flex-fill>
+          <h5>
+            <%= Spree.t(address_type + '_address') %>
+          </h5>
+        </div>
+        <% if user_available_addresses.present? %>
+          <div>
+            <%= link_to(spree.edit_checkout_address_path(address)) do %>
+              <%= spree_checkout_svg_tag('edit.svg') %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
 
       <% if user_available_addresses.present? %>
-        <div class="select_address mb-5">
-          <div class="form-group col">
+        <div class="row">
+          <div class="col-auto">
             <% user_available_addresses.each_with_index do |address, idx| %>
             <div class="row mb-3" id="<%= [address_type, dom_id(address)].join('_') %>">
               <label class="form-check-label spree-radio-label col-8">
                 <%= form.radio_button "#{address_name}_id", address.id, checked: (address.id == try_spree_current_user["#{address_name}_id"] || idx == 0) %>
                 <span class="spree-radio-label-custom-input"></span>
-                  <%= render "spree/users/address", address: address %>
+                  <%= render "spree/checkout/addresses/users/address_v_card", address: address %>
               </label>
-              <%= render "spree/users/address_controls", address: address %>
+
+              <%= render "spree/checkout/addresses/users/address_controls", address: address %>
             </div>
             <% end %>
             <div class="row mb-3">
@@ -49,11 +61,20 @@
                                                                        form: address_form } %>
       <% end %>
 
-      <%= button_tag :update_country, formaction: spree.checkout_change_address_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { turbo_frame: :_top, form__validation_target: "submitBtn" } %>
+      <%= button_tag :update_country, formaction: spree.checkout_change_address_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { form__validation_target: "submitBtn" } %>
     </div>
+
+    <% if address_type == 'billing' %>
+      <div data-hook="use_billing">
+        <div class="form-check">
+          <%= check_box_tag 'order[use_billing]', '1', @order.shipping_eq_billing_address?, { class: 'form-check-input' } %>
+          <%= label_tag :order_use_billing, Spree.t(:use_billing_address), class: 'form-check-label' %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 
-  <%= hidden_field_tag 'save_user_address', true, data: { hook: "save_user_address" } %>
+  <%= hidden_field_tag :save_user_address, true %>
 </div>
 
 <% content_for :back_button do %>

@@ -1,0 +1,14 @@
+<div class=d-flex>
+  <div class=flex-fill>
+    <%= link_to(spree.edit_checkout_address_path(address), method: :get, class: 'ml-1 d-inline-block', data: { hook: 'edit_address' }) do %>
+      <%= spree_checkout_svg_tag('edit.svg') %>
+    <% end %>
+  </div>
+  <div class="flex-fill text-end">
+    <%= link_to(spree.checkout_address_path(address), data: {turbo: true}) do %>
+      <%= spree_checkout_svg_tag('trash.svg') %>
+    <% end %>
+  </div>
+</div>
+
+

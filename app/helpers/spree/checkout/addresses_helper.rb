@@ -1,6 +1,6 @@
 module Spree
   module Checkout
-    module AddressHelper
+    module AddressesHelper
       def address_field(form, method, address_id = 'b', &handler)
         content_tag :div, id: [address_id, method].join, class: 'form-group checkout-content-inner-field has-float-label' do
           if handler
