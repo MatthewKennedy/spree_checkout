@@ -51,7 +51,7 @@ module Spree
       end
 
       def update_country
-        @order = Spree::Order.new(update_address_country_params)
+        @order.send("build_#{params[:address_kind]}", update_address_country_params["#{params[:address_kind]}_attributes".to_sym])
 
         # Empty out the zipcode and State on Country change.
         @order.send(params[:address_kind]).zipcode = nil
