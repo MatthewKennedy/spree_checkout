@@ -12,7 +12,9 @@ Spree::Core::Engine.add_routes do
       patch 'apply_coupon',           to: 'orders#apply_coupon'
       patch 'remove_coupon/:code',    to: 'orders#remove_coupon', as: :remove_coupon
       patch 'update_shipping_choice', to: 'orders#update_shipping_choice'
-      post  'update_country',         to: 'orders#update_country'
+
+      # POST because we run the @order.build_[kind]_address() and carry existing params.
+      post  'change_address_country', to: 'orders#change_address_country'
     end
   end
 end

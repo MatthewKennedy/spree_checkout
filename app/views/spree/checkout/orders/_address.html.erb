@@ -49,7 +49,7 @@
                                                                        form: address_form } %>
       <% end %>
 
-      <%= button_tag :update_country, formaction: spree.checkout_update_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { turbo_frame: :_top, form__validation_target: "submitBtn" } %>
+      <%= button_tag :update_country, formaction: spree.checkout_change_address_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { turbo_frame: :_top, form__validation_target: "submitBtn" } %>
     </div>
   <% end %>
 

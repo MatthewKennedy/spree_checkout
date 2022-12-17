@@ -29,7 +29,8 @@ module Spree
 
       def edit; end
 
-      # Updates the order and advances to the next state (when possible.)
+      # update
+      # Updates the order and advances to the next state (when possible).
       def update
         if @order.update_from_params(params, permitted_checkout_attributes, request.headers.env)
           @order.temporary_address = !params[:save_user_address]
@@ -50,7 +51,10 @@ module Spree
         end
       end
 
-      def update_country
+      # change_address_country
+      # Builds a new address of the relevant kind (bill_address or ship_address),
+      # with the new country and existing params.
+      def change_address_country
         @order.send("build_#{params[:address_kind]}", update_address_country_params["#{params[:address_kind]}_attributes".to_sym])
 
         # Empty out the zipcode and State on Country change.
@@ -64,6 +68,8 @@ module Spree
         end
       end
 
+      # apply_coupon
+      # Applies the coupon code, or returns a descriptive error for customer.
       def apply_coupon
         current_order.coupon_code = params[:order][:coupon_code]
         @result = coupon_handler.new(current_order).apply
@@ -75,6 +81,8 @@ module Spree
         end
       end
 
+      # remove_coupon
+      # Removes the specified coupon code.
       def remove_coupon
         current_order.coupon_code = params[:code]
         @result = coupon_handler.new(current_order).remove(params[:code])
@@ -101,7 +109,7 @@ module Spree
       private
 
       def update_address_country_params
-        params.fetch(:order, {}).permit(permitted_order_attributes)
+        params.fetch(:order, {}).permit(permitted_order_attributes + [:state_lock_version])
       end
 
       def ensure_checkout_allowed
