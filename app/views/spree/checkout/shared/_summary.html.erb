@@ -51,7 +51,7 @@
       <% if Spree::Checkout::Config[:coupon_codes_enabled] %>
         <hr>
 
-        <%= form_with model: @order, url: spree.checkout_apply_coupon_path do |form| %>
+        <%= form_with model: @order, url: spree.checkout_apply_coupon_path(@order) do |form| %>
           <div class="d-flex" id="discount-apply">
             <div class="flex-fill">
               <div class="form-floating">

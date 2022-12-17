@@ -12744,10 +12744,31 @@
       this.submitBtnTarget.click();
     }
   }
+  class ModalController extends Controller {
+    connect() {
+      if (document.documentElement.hasAttribute("data-turbo-preview")) {
+        const modalBackdrop = document.querySelector(".modal-backdrop");
+        if (modalBackdrop) modalBackdrop.remove();
+        return;
+      }
+      this.modal = new bootstrap.Modal(this.element, {
+        keyboard: false
+      });
+      this.modal.show();
+    }
+    disconnect() {
+      if (this.modal) this.modal.dispose();
+    }
+    submitEnd(event) {
+      if (event.detail.formSubmission.submitter.formNoValidate === true) return;
+      if (event.detail.success) this.modal.hide();
+    }
+  }
   window.Stimulus = Application.start();
   Stimulus.register("input--card-validation", InputCardValidationController);
   Stimulus.register("input--disable-enable", InputDisabledController);
   Stimulus.register("form--validation", FormValidationController);
+  Stimulus.register("modal", ModalController);
   const SpreeCheckout = {};
   if (!window.SpreeCheckout) {
     window.SpreeCheckout = SpreeCheckout;

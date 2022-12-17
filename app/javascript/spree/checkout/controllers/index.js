@@ -6,6 +6,7 @@ import { Application } from '@hotwired/stimulus'
 import InputCardValidationController from './input/card_validation_controller'
 import InputDisabledController from './input/disabled_controller'
 import FormValidationController from './form/validation_controller'
+import ModalController from './modal_controller'
 
 // Stimulus - Setup
 window.Stimulus = Application.start()
@@ -13,3 +14,4 @@ window.Stimulus = Application.start()
 Stimulus.register('input--card-validation', InputCardValidationController)
 Stimulus.register('input--disable-enable', InputDisabledController)
 Stimulus.register('form--validation', FormValidationController)
+Stimulus.register('modal', ModalController)

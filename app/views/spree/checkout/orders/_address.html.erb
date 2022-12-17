@@ -22,14 +22,14 @@
         </div>
         <% if user_available_addresses.present? %>
           <div>
-            <%= link_to(spree.edit_checkout_address_path(address)) do %>
-              <%= spree_checkout_svg_tag('edit.svg') %>
+            <%= link_to(spree.address_manager_checkout_addresses_path, class: 'btn btn-sm btn-link',method: :get, data: { turbo_frame: :modal }) do %>
+              Use an existing address
             <% end %>
           </div>
         <% end %>
       </div>
 
-      <% if user_available_addresses.present? %>
+      <% if !user_available_addresses.present? %>
         <div class="row">
           <div class="col-auto">
             <% user_available_addresses.each_with_index do |address, idx| %>

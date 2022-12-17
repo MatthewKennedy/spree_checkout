@@ -38,6 +38,8 @@ module Spree
         redirect_to(request.env['HTTP_REFERER'] || addresses_path) unless request.xhr?
       end
 
+      def address_manager; end
+
       private
 
       def address_params
