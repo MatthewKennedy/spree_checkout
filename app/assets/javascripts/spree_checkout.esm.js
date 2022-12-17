@@ -11876,15 +11876,6 @@ Controller.outlets = [];
 
 Controller.values = {};
 
-class accordionController extends Controller {
-  connect() {
-    console.log("Conneted accordian");
-  }
-  validate() {
-    this.submitBtnTarget.click();
-  }
-}
-
 var commonjsGlobal = typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 
 var NumeralFormatter = function(numeralDecimalMark, numeralIntegerScale, numeralDecimalScale, numeralThousandsGroupStyle, numeralPositiveOnly, stripLeadingZeroes, prefix, signBeforePrefix, tailPrefix, delimiter) {
@@ -13601,8 +13592,6 @@ class FormValidationController extends Controller {
 }
 
 window.Stimulus = Application.start();
-
-Stimulus.register("accordion", accordionController);
 
 Stimulus.register("input--card-validation", InputCardValidationController);
 
