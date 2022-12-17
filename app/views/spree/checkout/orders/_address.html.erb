@@ -14,7 +14,9 @@
     <% address_name = "#{address_type[0...4]}_address" %>
 
     <div class="col-12 my-4" data-hook="<%= address_type %>_fieldset_wrapper" data-controller='form--validation'>
-      <h5><%= Spree.t(address_type + '_address') %></h5>
+      <h5>
+        <%= Spree.t(address_type + '_address') %>
+      </h5>
 
       <% if user_available_addresses.present? %>
         <div class="select_address mb-5">
@@ -39,7 +41,7 @@
         </div>
       <% end %>
 
-      <%= form.fields_for "#{address_name}_attributes" do |address_form| %>
+      <%= form.fields_for address_name.to_sym do |address_form| %>
         <%= render partial: 'spree/checkout/addresses/form', locals: { address_name: address_name,
                                                                        address_form: address_form,
                                                                        address_type: address_type,
@@ -47,7 +49,7 @@
                                                                        form: address_form } %>
       <% end %>
 
-      <%= button_tag :update_country, formaction: spree.update_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { turbo_frame: :_top, form__validation_target: "submitBtn" } %>
+      <%= button_tag :update_country, formaction: spree.checkout_update_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { turbo_frame: :_top, form__validation_target: "submitBtn" } %>
     </div>
   <% end %>
 
