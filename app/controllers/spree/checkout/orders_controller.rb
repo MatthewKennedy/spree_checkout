@@ -4,7 +4,7 @@ module Spree
     # actually a Checkout object. There's enough distinct logic specific to
     # checkout which has nothing to do with updating an order that this approach
     # is warranted.
-    class OrderController < Spree::Checkout::StoreController
+    class OrdersController < Spree::Checkout::BaseController
       include Spree::Checkout::AddressBook
 
       before_action :set_cache_header, only: [:edit]
@@ -28,7 +28,7 @@ module Spree
 
       rescue_from Spree::Core::GatewayError, with: :rescue_from_spree_gateway_error
 
-      layout 'spree/layouts/checkout'
+      layout 'spree/layouts/spree_checkout'
 
       # Updates the order and advances to the next state (when possible.)
       def update

@@ -1,6 +1,6 @@
 module Spree
   module Checkout
-    class StoreController < ApplicationController
+    class BaseController < ApplicationController
       include Spree::Core::ControllerHelpers::Auth
       include Spree::Core::ControllerHelpers::Search
       include Spree::Core::ControllerHelpers::Store
