@@ -49,6 +49,12 @@
       </footer>
     </div>
 
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x">
+        <%= turbo_frame_tag :toast %>
+      </div>
+    </div>
+
     <%= turbo_frame_tag :modal %>
     <%= spree_checkout_flash_messages %>
   </body>

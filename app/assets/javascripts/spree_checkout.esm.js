@@ -13612,6 +13612,16 @@ class ModalController extends Controller {
   }
 }
 
+class ToastController extends Controller {
+  connect() {
+    this.toast = new bootstrap.Toast(this.element);
+    this.toast.show();
+  }
+  disconnect() {
+    this.toast.dispose();
+  }
+}
+
 window.Stimulus = Application.start();
 
 Stimulus.register("input--card-validation", InputCardValidationController);
@@ -13621,6 +13631,8 @@ Stimulus.register("input--disable-enable", InputDisabledController);
 Stimulus.register("form--validation", FormValidationController);
 
 Stimulus.register("modal", ModalController);
+
+Stimulus.register("toast", ToastController);
 
 const SpreeCheckout = {};
 

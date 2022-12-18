@@ -5,6 +5,14 @@ module Spree
         @spree_checkout_available_payment_methods ||= @order.available_payment_methods
       end
 
+      def spree_checkout_toaste_class(kind: :notice)
+        if kind == :error
+          'text-bg-danger'
+        else
+          'text-bg-dark'
+        end
+      end
+
       def spree_checkout_product_images(product, variants)
         if product.variants_and_option_values(current_currency).any?
           variants_without_master_images = variants.reject(&:is_master).map(&:images).flatten

@@ -1,3 +1,9 @@
 <%= turbo_stream.update "checkout-summary" do %>
   <%= render partial: 'spree/checkout/shared/summary', locals: { order: @order } %>
 <% end %>
+
+<% if response_message %>
+  <%= turbo_stream.prepend :toast do %>
+    <%= render partial: 'spree/checkout/shared/toast', locals: { message: response_message, kind: kind } %>
+  <% end %>
+<% end %>

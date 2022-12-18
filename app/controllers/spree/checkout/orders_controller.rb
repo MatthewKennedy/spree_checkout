@@ -70,13 +70,20 @@ module Spree
       # Applies the coupon code, or returns a descriptive error for customer.
       def apply_coupon
         current_order.coupon_code = params[:order][:coupon_code]
+
         @result = coupon_handler.new(current_order).apply
 
-        @order.update_with_updater!
-        @order.reload
+        if @result.successful?
+          @order.update_with_updater!
+          @order.reload
 
-        respond_with(@order) do |format|
-          format.turbo_stream { render :update_summary }
+          respond_with(@order) do |format|
+            format.turbo_stream { render :update_summary, locals: { response_message: @result.success, kind: :notify } }
+          end
+        else
+          respond_with(@order) do |format|
+            format.turbo_stream { render :update_summary, locals: { response_message: @result.error, kind: :error } }
+          end
         end
       end
 
@@ -86,11 +93,17 @@ module Spree
         current_order.coupon_code = params[:code]
         @result = coupon_handler.new(current_order).remove(params[:code])
 
-        @order.update_with_updater!
-        @order.reload
+        if @result.successful?
+          @order.update_with_updater!
+          @order.reload
 
-        respond_with(@order) do |format|
-          format.turbo_stream { render :update_summary }
+          respond_with(@order) do |format|
+            format.turbo_stream { render :update_summary, locals: { response_message: @result.success, kind: :notify } }
+          end
+        else
+          respond_with(@order) do |format|
+            format.turbo_stream { render :update_summary, locals: { response_message: @result.error, kind: :error } }
+          end
         end
       end
 
