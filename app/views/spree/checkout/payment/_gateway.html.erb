@@ -1,6 +1,6 @@
 <div class="payment-gateway-fields bg-light border-top p-3" data-controller="input--card-validation">
   <% param_prefix = "payment_source[#{payment_method.id}]" %>
-  <% options_hash = Rails.env.production? ? {autocomplete: 'off'} : {} %>
+  <% options_hash = Rails.env.production? ? { autocomplete: 'off' } : {} %>
 
   <div class="row">
     <div class="col-12">

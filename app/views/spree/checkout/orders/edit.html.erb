@@ -1,4 +1,5 @@
 <%= render partial: "spree/checkout/orders/components/#{@order.state}" %>
+
 <%= render partial: 'spree/checkout/shared/error_messages', locals: { target: @order } %>
 
 <% if content_for :express_checkout_options %>
