@@ -21,8 +21,6 @@ module Spree
       before_action :setup_for_current_state
       before_action :add_store_credit_payments, :remove_store_credit_payments, only: [:update]
 
-      helper 'spree/checkout/orders'
-
       rescue_from Spree::Core::GatewayError, with: :rescue_from_spree_gateway_error
 
       layout 'spree/layouts/spree_checkout'

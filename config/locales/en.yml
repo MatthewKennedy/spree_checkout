@@ -1,26 +1,26 @@
 en:
-  spree:
-    checkout:
-      apply: Apply
-      bill_to: Bill to
-      expire_date_format: "Expiration date (MM/YY)"
-      express_checkout: Express checkout
-      each: each
-      card_varifiction_code: Security code
-      card_number: Card number
-      change: change
-      discount: Discount
-      free: FREE
-      cardholders_name: Cardholders name
-      payment_method: Payment Method
-      shipping_method: Shipping method
-      continue_to_payment: Continue to payment
-      continue_to_delivery: Continue to shipping
-      continue_to_complete: Complete order
-      return_to_cart: Return to cart
-      return_to_address: Return to address
-      return_to_payment: Return to payment
-      return_to_delivery: Return to shipping
-      ship_to: Ship to
-      subtotal: Subtotal
-      discount_code: Discount code
+  spree_checkout:
+    apply: Apply
+    bill_to: Bill to
+    billing_address: Billing address
+    expire_date_format: "Expiration date (MM/YY)"
+    express_checkout: Express checkout
+    each: each
+    card_varifiction_code: Security code
+    card_number: Card number
+    change: change
+    discount: Discount
+    free: FREE
+    cardholders_name: Cardholders name
+    payment_method: Payment Method
+    shipping_method: Shipping method
+    continue_to_payment: Continue to payment
+    continue_to_delivery: Continue to shipping
+    continue_to_complete: Complete order
+    return_to_cart: Return to cart
+    return_to_address: Return to address
+    return_to_payment: Return to payment
+    return_to_delivery: Return to shipping
+    ship_to: Ship to
+    subtotal: Subtotal
+    discount_code: Discount code

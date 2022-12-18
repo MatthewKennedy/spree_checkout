@@ -24,7 +24,7 @@
           </h5>
         </div>
 
-        <% if user_available_addresses.present? %>
+        <% if spree_checkout_user_available_addresses.present? %>
           <div>
             <%= link_to(spree.address_manager_checkout_addresses_path, class: 'btn btn-sm btn-link',method: :get, data: { turbo_frame: :modal }) do %>
               Use an existing address
@@ -64,5 +64,5 @@
 <% end %>
 
 <% content_for :proceed_button do %>
-  <%= submit_tag I18n.t("spree.checkout.continue_to_#{next_step_name}"), class: 'btn btn-primary w-100' %>
+  <%= submit_tag I18n.t("spree_checkout.continue_to_#{spree_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
 <% end %>

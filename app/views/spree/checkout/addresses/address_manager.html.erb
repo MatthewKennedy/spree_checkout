@@ -1,14 +1,14 @@
 <% content_for :modal_header do %>
-  <h5 class="modal-title"><%= I18n.t('spree.admin.products.new_product_details') %></h5>
+  <h5 class="modal-title"><%= I18n.t('spree_checkout.billing_address') %></h5>
   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 <% end %>
 
 <% content_for :modal_body do %>
   <div class="container">
-    <% if !user_available_addresses.present? %>
+    <% if !spree_checkout_user_available_addresses.present? %>
       <div class="row">
         <div class="col-auto">
-          <% user_available_addresses.each_with_index do |address, idx| %>
+          <% spree_checkout_user_available_addresses.each_with_index do |address, idx| %>
           <div class="row mb-3" id="<%= [address_type, dom_id(address)].join('_') %>">
             <label class="form-check-label spree-radio-label col-8">
               <%= form.radio_button "#{address_name}_id", address.id, checked: (address.id == try_spree_current_user["#{address_name}_id"] || idx == 0) %>

@@ -2,9 +2,9 @@
 <%= render partial: 'spree/checkout/shared/error_messages', locals: { target: @order } %>
 
 <% if content_for :express_checkout_options %>
-  <% if express_checkout_payment_methods.any? %>
+  <% if spree_checkout_express_checkout_payment_methods.any? %>
     <div id=express-checkouts>
-      <div class=notation-bar><%= I18n.t('spree.checkout.express_checkout') %></div>
+      <div class=notation-bar><%= I18n.t('spree_checkout.express_checkout') %></div>
       <%= yield :express_checkout_options %>
       <div class=notation-bar>or</div>
     </div>

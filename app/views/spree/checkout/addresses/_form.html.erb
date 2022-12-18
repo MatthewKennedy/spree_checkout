@@ -1,6 +1,19 @@
 <% address_id = address_type.chars.first %>
 
 <div data-hook='<%= "#{address_type}_inner" %>'>
+
+  <div class="form-floating mb-3">
+    <%= form.collection_select :country_id, available_countries, :id, :name, { }, { class: 'form-select', data: { action: 'form--validation#validate' } } %>
+
+    <%= form.label :country_id do %>
+      <%= Spree.t(:country) %> <abbr class=required title=required>*</abbr>
+    <% end %>
+
+    <hr class=my-4>
+  </div>
+
+
+
   <div class=row>
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
@@ -43,21 +56,6 @@
     <%= form.label :address2, Spree.t(:street_address_2) %>
   </div>
 
-  <div class="form-floating mb-3">
-    <%= form.text_field :city, class: 'form-control', required: true, placeholder: Spree.t(:city) %>
-
-    <%= form.label :city do %>
-      <%= Spree.t(:city) %> <abbr class=required title=required>*</abbr>
-    <% end %>
-  </div>
-
-  <div class="form-floating mb-3">
-    <%= form.collection_select :country_id, available_countries, :id, :name, { }, { class: 'form-select', data: { action: 'form--validation#validate' } } %>
-
-    <%= form.label :country_id do %>
-      <%= Spree.t(:country) %> <abbr class=required title=required>*</abbr>
-    <% end %>
-  </div>
 
   <div id=<%= "#{address_name}_state_zip-state-and-zipcode" %>>
     <%= render partial: "spree/checkout/addresses/#{address_name}_state_zip" %>

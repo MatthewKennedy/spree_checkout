@@ -1,10 +1,6 @@
 module Spree
   module Checkout
     module OrdersHelper
-      def order_just_completed?(order)
-        flash[:order_completed] && order.present?
-      end
-
       def spree_checkout_available_payment_methods
         @spree_checkout_available_payment_methods ||= @order.available_payment_methods
       end
@@ -65,55 +61,11 @@ module Spree
         end
       end
 
-      def express_checkout_payment_methods
+      def spree_checkout_express_checkout_payment_methods
         spree_checkout_available_payment_methods.select(&:hosted_checkout?)
       end
 
-      def compact_promotion(order)
-        promo_ids = []
-        promotion_info = nil
-
-        order.line_item_adjustments.promotion.eligible.group_by(&:source_id).each do |source_id, _adjustment|
-          promo_ids << source_id
-        end
-
-        promo_ids.each do |promo_id|
-          promotion_info = promotion_info(order, promo_id)
-        end
-
-        promotion_info
-      end
-
-      def promotion_info(order, promo_id)
-        data = {}
-        label = []
-        code = []
-        name = []
-        amt = []
-
-        order.line_item_adjustments.promotion.eligible.each do |adjustment|
-          next unless adjustment.source_id.to_s == promo_id.to_s
-
-          code << if adjustment.source.promotion.code.present?
-                    adjustment.source.promotion.code
-                  end
-          name << adjustment.source.promotion.name
-          label << adjustment.label
-          amt << adjustment.amount
-        end
-
-        total = amt.sum
-        display_total = Spree::Money.new(total, currency: order.currency)
-
-        data[:label] = label.first
-        data[:code] = code.first
-        data[:name] = name.first
-        data[:total] = display_total.to_s
-
-        data
-      end
-
-      def next_step_name
+      def spree_checkout_next_step_name
         states = @order.checkout_steps
         states.each_with_index.map do |state, _i|
           current_index = states.index(@order.state)
@@ -123,7 +75,7 @@ module Spree
         end
       end
 
-      def previous_step_name
+      def spree_checkout_previous_step_name
         states = @order.checkout_steps
         states.each_with_index.map do |state, _i|
           current_index = states.index(@order.state)
@@ -133,11 +85,10 @@ module Spree
         end
       end
 
-      def checkout_progress_line(numbers: false)
+      def spree_checkout_checkout_progress_line
         states = @order.checkout_steps
         items = states.each_with_index.map do |state, i|
           text = Spree.t("order_state.#{state}").titleize
-          text.prepend("#{i.succ}. ") if numbers
 
           css_classes = []
           current_index = states.index(@order.state)
