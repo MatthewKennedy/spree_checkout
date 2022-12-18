@@ -6,7 +6,7 @@
   </h5>
 
   <%= form.fields_for :payments_attributes do |payment| %>
-    <ul id=payment-methods class="accordion list-group mb-4">
+    <ul id=payment-methods class="accordion list-group">
       <% spree_checkout_available_payment_methods.each_with_index do |payment_method, index| %>
         <% if index == 0 %>
           <% show_first = true %>

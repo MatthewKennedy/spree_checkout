@@ -16,7 +16,7 @@
   <% ['billing'].each do |address_type| %>
     <% address_name = "#{address_type[0...4]}_address" %>
 
-    <div class="col-12 my-4" data-hook="<%= address_type %>_fieldset_wrapper" data-controller='form--validation'>
+    <div class="col-12" data-hook="<%= address_type %>_fieldset_wrapper" data-controller='form--validation'>
       <div class=d-flex>
         <div class=flex-fill>
           <h5>
