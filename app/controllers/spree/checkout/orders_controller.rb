@@ -59,9 +59,9 @@ module Spree
         @order.send(params[:address_kind]).zipcode = nil
         @order.send(params[:address_kind]).state = nil
 
-        @address_partial = "#{params[:address_kind]}_state_zip"
-
-        respond_with(@order, &:turbo_stream)
+        respond_with(@order) do |format|
+          format.turbo_stream { render :change_address_country, locals: { address_kind: params[:address_kind] } }
+        end
       end
 
       # apply_coupon

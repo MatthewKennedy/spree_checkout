@@ -12,8 +12,6 @@
     <hr class=my-4>
   </div>
 
-
-
   <div class=row>
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
@@ -57,8 +55,8 @@
   </div>
 
 
-  <div id=<%= "#{address_name}_state_zip-state-and-zipcode" %>>
-    <%= render partial: "spree/checkout/addresses/#{address_name}_state_zip" %>
+  <div id=<%= "#{address_name}__city-state-zipcode" %>>
+    <%= render partial: "spree/checkout/addresses/city_state_zip", locals: { address_kind: address_name } %>
   </div>
 
   <div class="form-floating <% if Spree::Config[:alternative_shipping_phone] %>mb-3<% end %>">
