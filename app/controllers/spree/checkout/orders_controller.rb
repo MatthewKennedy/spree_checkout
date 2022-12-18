@@ -120,7 +120,7 @@ module Spree
       private
 
       def update_address_country_params
-        params.fetch(:order, {}).permit(permitted_order_attributes + [:state_lock_version])
+        params.fetch(:order, {}).permit(permitted_order_attributes)
       end
 
       def ensure_checkout_allowed
@@ -183,6 +183,10 @@ module Spree
 
       def coupon_handler
         Spree::PromotionHandler::Coupon
+      end
+
+      def permitted_checkout_attributes
+        super + [:use_shipping, :state_lock_version]
       end
     end
   end
