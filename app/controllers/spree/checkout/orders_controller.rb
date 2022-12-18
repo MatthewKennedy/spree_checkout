@@ -61,9 +61,7 @@ module Spree
 
         @address_partial = "#{params[:address_kind]}_state_zip"
 
-        respond_with(@order) do |format|
-          format.turbo_stream
-        end
+        respond_with(@order, &:turbo_stream)
       end
 
       # apply_coupon

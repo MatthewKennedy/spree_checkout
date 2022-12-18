@@ -1,3 +1,5 @@
+<% response_message ||= nil %>
+
 <%= turbo_stream.update "checkout-summary" do %>
   <%= render partial: 'spree/checkout/shared/summary', locals: { order: @order } %>
 <% end %>
