@@ -61,7 +61,7 @@
     <%= render partial: "spree/checkout/addresses/#{address_name}_state_zip" %>
   </div>
 
-  <div class="form-floating mb-3">
+  <div class="form-floating <% if Spree::Config[:alternative_shipping_phone] %>mb-3<% end %>">
     <%= form.phone_field :phone, class: 'form-control', required: address.require_phone?, placeholder: Spree.t(:phone) %>
 
     <%= form.label :phone do %>
@@ -70,7 +70,7 @@
   </div>
 
   <% if Spree::Config[:alternative_shipping_phone] %>
-    <div class="form-floating mb-3">
+    <div class="form-floating">
       <%= form.phone_field :alternative_phone, class: 'form-control', placeholder: Spree.t(:alternative_phone) %>
       <%= form.label :alternative_phone, Spree.t(:alternative_phone) %>
     </div>
