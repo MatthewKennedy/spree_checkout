@@ -3,3 +3,13 @@
     <%= express_checkout.name %>
   <% end %>
 <% end %>
+
+<% content_for :back_button do %>
+  <%= link_to spree.cart_path, class: 'btn btn-link' do %>
+    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= Spree.t(:return_to_cart) %>
+  <% end %>
+<% end %>
+
+<% content_for :proceed_button do %>
+  <%= submit_tag I18n.t("spree_checkout.continue_to_#{spree_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
+<% end %>

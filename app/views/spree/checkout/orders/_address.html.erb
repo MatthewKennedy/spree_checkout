@@ -45,7 +45,7 @@
     </div>
 
     <% if address_type == 'billing' %>
-      <div data-hook="use_billing">
+      <div class="d-none" data-hook="use_billing">
         <div class="form-check">
           <%= check_box_tag 'order[use_billing]', '1', @order.shipping_eq_billing_address?, { class: 'form-check-input' } %>
           <%= label_tag :order_use_billing, Spree.t(:use_billing_address), class: 'form-check-label' %>
@@ -56,13 +56,3 @@
 
   <%= hidden_field_tag :save_user_address, true %>
 </div>
-
-<% content_for :back_button do %>
-  <%= link_to spree.cart_path, class: 'btn btn-link' do %>
-    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= Spree.t(:return_to_cart) %>
-  <% end %>
-<% end %>
-
-<% content_for :proceed_button do %>
-  <%= submit_tag I18n.t("spree_checkout.continue_to_#{spree_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
-<% end %>

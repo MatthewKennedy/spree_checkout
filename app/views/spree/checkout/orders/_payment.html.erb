@@ -33,13 +33,3 @@
     </ul>
   <% end %>
 </div>
-
-<% content_for :back_button do %>
-  <%= link_to spree.checkout_state_path(spree_checkout_previous_step_name), class: 'btn btn-link' do %>
-    <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= I18n.t("spree_checkout.return_to_#{spree_checkout_previous_step_name}") %>
-  <% end %>
-<% end %>
-
-<% content_for :proceed_button do %>
-  <%= submit_tag I18n.t("spree_checkout.continue_to_#{spree_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
-<% end %>
