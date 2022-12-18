@@ -75,6 +75,7 @@ module Spree
         @result = coupon_handler.new(current_order).apply
 
         @order.update_with_updater!
+        @order.reload
 
         respond_with(@order) do |format|
           format.turbo_stream { render :update_summary }
@@ -88,6 +89,7 @@ module Spree
         @result = coupon_handler.new(current_order).remove(params[:code])
 
         @order.update_with_updater!
+        @order.reload
 
         respond_with(@order) do |format|
           format.turbo_stream { render :update_summary }

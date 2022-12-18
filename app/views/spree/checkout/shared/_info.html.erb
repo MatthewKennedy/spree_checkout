@@ -1,4 +1,4 @@
-<div id="checkout-so-far" class="px-3 mb-5 border rounded">
+<div class="checkout-so-far px-3 mb-5 border rounded">
   <% if @order.state == 'delivery' %>
     <div class="text-muted p-2">
       <%= Spree.t(:contact) %>:
@@ -9,7 +9,7 @@
     </div>
 
     <div class="text-end p-2">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+      <small><%= link_to I18n.t('spree.checkout.change'), spree.checkout_state_path('address') %></small>
     </div>
 
     <span class="fw border-top"></span>
@@ -19,11 +19,14 @@
     </div>
 
     <div class="text-truncate p-2">
-      <%= @order.shipping_address.address1 %>, <%= @order.shipping_address.city %>, <%= @order.shipping_address.zipcode %>, <%= @order.shipping_address.country %>
+      <%= @order.shipping_address.address1 %>,
+      <%= @order.shipping_address.city %>,
+      <%= @order.shipping_address.zipcode %>,
+      <%= @order.shipping_address.country %>
     </div>
 
     <div class="text-end p-2">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+      <small><%= link_to I18n.t('spree.checkout.change'), spree.checkout_state_path('address') %></small>
     </div>
   <% end %>
 
@@ -37,7 +40,7 @@
     </div>
 
     <div class="text-end p-2">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+      <small><%= link_to I18n.t('spree.checkout.change'), spree.checkout_state_path('address') %></small>
     </div>
 
   <span class="fw border-top"></span>
@@ -47,11 +50,14 @@
     </div>
 
     <div class="text-truncate p-2">
-      <%= @order.billing_address.address1 %>, <%= @order.billing_address.city %>, <%= @order.billing_address.zipcode %>, <%= @order.billing_address.country %>
+      <%= @order.shipping_address.address1 %>,
+      <%= @order.shipping_address.city %>,
+      <%= @order.shipping_address.zipcode %>,
+      <%= @order.shipping_address.country %>
     </div>
 
     <div class="text-end p-2">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('address') %>
+      <small><%= link_to I18n.t('spree.checkout.change'), spree.checkout_state_path('address') %></small>
     </div>
 
   <span class="fw border-top"></span>
@@ -67,7 +73,7 @@
     </div>
 
     <div class="text-end p-2">
-      <%= link_to Spree.t(:change), spree.checkout_state_path('delivery') %>
+      <small><%= link_to I18n.t('spree.checkout.change'), spree.checkout_state_path('delivery') %></small>
     </div>
   <% end %>
 </div>

@@ -2,9 +2,13 @@ en:
   spree:
     checkout:
       apply: Apply
+      bill_to: Bill to
       expire_date_format: "Expiration date (MM/YY)"
+      express_checkout: Express checkout
+      each: each
       card_varifiction_code: Security code
       card_number: Card number
+      change: change
       discount: Discount
       free: FREE
       cardholders_name: Cardholders name

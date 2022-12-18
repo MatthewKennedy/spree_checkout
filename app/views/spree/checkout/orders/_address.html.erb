@@ -10,16 +10,20 @@
 <% end %>
 
 <div class="row">
-  <% ['billing', 'shipping'].each do |address_type| %>
+  <%# Below we are capturing the billing address and cloning it to the shipping address. %>
+  <%# we do this to streamline the checkout flow, we can ask if the user wants to change the billing %>
+  <%# address on the payment page. %>
+  <% ['billing'].each do |address_type| %>
     <% address_name = "#{address_type[0...4]}_address" %>
 
     <div class="col-12 my-4" data-hook="<%= address_type %>_fieldset_wrapper" data-controller='form--validation'>
       <div class=d-flex>
         <div class=flex-fill>
           <h5>
-            <%= Spree.t(address_type + '_address') %>
+            <%= Spree.t('shipping_address') %>
           </h5>
         </div>
+
         <% if user_available_addresses.present? %>
           <div>
             <%= link_to(spree.address_manager_checkout_addresses_path, class: 'btn btn-sm btn-link',method: :get, data: { turbo_frame: :modal }) do %>
@@ -28,30 +32,6 @@
           </div>
         <% end %>
       </div>
-
-      <% if !user_available_addresses.present? %>
-        <div class="row">
-          <div class="col-auto">
-            <% user_available_addresses.each_with_index do |address, idx| %>
-            <div class="row mb-3" id="<%= [address_type, dom_id(address)].join('_') %>">
-              <label class="form-check-label spree-radio-label col-8">
-                <%= form.radio_button "#{address_name}_id", address.id, checked: (address.id == try_spree_current_user["#{address_name}_id"] || idx == 0) %>
-                <span class="spree-radio-label-custom-input"></span>
-                  <%= render "spree/checkout/addresses/users/address_v_card", address: address %>
-              </label>
-
-              <%= render "spree/checkout/addresses/users/address_controls", address: address %>
-            </div>
-            <% end %>
-            <div class="row mb-3">
-              <label class="form-check-label spree-radio-label col">
-                <%= form.radio_button "#{address_name}_id", 0, class: 'form-check-input' %> <h4><%= Spree.t('address_book.other_address') %></h4>
-                <span class="spree-radio-label-custom-input"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-      <% end %>
 
       <%= form.fields_for address_name.to_sym do |address_form| %>
         <%= render partial: 'spree/checkout/addresses/form', locals: { address_name: address_name,

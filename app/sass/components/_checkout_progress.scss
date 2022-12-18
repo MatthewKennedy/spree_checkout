@@ -57,7 +57,7 @@
 }
 
 
-div#checkout-so-far {
+div.checkout-so-far {
   display: grid;
   grid-template-columns: max-content minmax(0, auto) max-content;
   align-items: center;

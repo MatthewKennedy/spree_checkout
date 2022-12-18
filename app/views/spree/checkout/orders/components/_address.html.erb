@@ -1,0 +1,5 @@
+<% content_for :express_checkout_options do %>
+  <% express_checkout_payment_methods.each do |express_checkout| %>
+    <%= express_checkout.name %>
+  <% end %>
+<% end %>
