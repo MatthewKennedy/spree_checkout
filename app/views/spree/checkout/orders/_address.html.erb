@@ -10,17 +10,14 @@
 <% end %>
 
 <div class="row">
-  <%# Below we are capturing the billing address and cloning it to the shipping address. %>
-  <%# we do this to streamline the checkout flow, we can ask if the user wants to change the billing %>
-  <%# address on the payment page. %>
   <% ['shipping'].each do |address_type| %>
-    <% address_name = "#{address_type[0...4]}_address" %>
+    <% address_kind = "#{address_type[0...4]}_address" %>
 
-    <div class="col-12" data-hook="<%= address_type %>_fieldset_wrapper" data-controller='form--validation'>
+    <div class="col-12" data-hook="<%= address_kind %>_fieldset_wrapper" data-controller='form--validation'>
       <div class=d-flex>
         <div class=flex-fill>
           <h5>
-            <%= Spree.t('shipping_address') %>
+            <%= Spree.t("#{address_type}_address") %>
           </h5>
         </div>
 
@@ -33,15 +30,11 @@
         <% end %>
       </div>
 
-      <%= form.fields_for address_name.to_sym do |address_form| %>
-        <%= render partial: 'spree/checkout/addresses/form', locals: { address_name: address_name,
-                                                                       address_form: address_form,
-                                                                       address_type: address_type,
-                                                                       address: Spree::Address.new(country: current_store.default_country),
-                                                                       form: address_form } %>
+      <%= form.fields_for address_kind.to_sym do |address_form| %>
+        <%= render partial: 'spree/checkout/addresses/form', locals: { address_kind: address_kind, form: address_form } %>
       <% end %>
 
-      <%= button_tag :update_country, formaction: spree.checkout_change_address_country_path(address_kind: address_name), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { form__validation_target: "submitBtn" } %>
+      <%= button_tag :update_country, formaction: spree.checkout_change_address_country_path(address_kind: address_kind), formmethod: :post, formnovalidate: true, style: 'display: none;', data: { form__validation_target: "submitBtn" } %>
     </div>
 
     <% if address_type == 'shipping' %>

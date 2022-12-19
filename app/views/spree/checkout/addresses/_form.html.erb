@@ -1,7 +1,4 @@
-<% address_id = address_type.chars.first %>
-
-<div data-hook='<%= "#{address_type}_inner" %>'>
-
+<div data-hook='<%= "#{address_kind}_inner" %>'>
   <div class="form-floating mb-3">
     <%= form.collection_select :country_id, available_countries, :id, :name, { }, { class: 'form-select', data: { action: 'form--validation#validate' } } %>
 
@@ -15,11 +12,11 @@
   <div class=row>
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
-          <%= form.text_field :firstname, class: 'form-control', required: true, placeholder: Spree.t(:first_name) %>
+        <%= form.text_field :firstname, class: 'form-control', required: true, placeholder: Spree.t(:first_name) %>
 
-          <%= form.label :firstname do %>
-            <%= Spree.t(:first_name) %> <abbr class=required title=required>*</abbr>
-          <% end %>
+        <%= form.label :firstname do %>
+          <%= Spree.t(:first_name) %> <abbr class=required title=required>*</abbr>
+        <% end %>
       </div>
     </div>
 
@@ -55,15 +52,15 @@
   </div>
 
 
-  <div id=<%= "#{address_name}__city-state-zipcode" %>>
-    <%= render partial: "spree/checkout/addresses/city_state_zip", locals: { address_kind: address_name } %>
+  <div id=<%= "#{address_kind}__city-state-zipcode" %>>
+    <%= render partial: "spree/checkout/addresses/city_state_zip", locals: { address_kind: address_kind } %>
   </div>
 
   <div class="form-floating <% if Spree::Config[:alternative_shipping_phone] %>mb-3<% end %>">
-    <%= form.phone_field :phone, class: 'form-control', required: address.require_phone?, placeholder: Spree.t(:phone) %>
+    <%= form.phone_field :phone, class: 'form-control', required: Spree::Config[:address_requires_phone], placeholder: Spree.t(:phone) %>
 
     <%= form.label :phone do %>
-      <%= Spree.t(:phone) %> <% if address.require_phone? %><abbr class=required title=required>*</abbr><% end %>
+      <%= Spree.t(:phone) %> <% if Spree::Config[:address_requires_phone] %><abbr class=required title=required>*</abbr><% end %>
     <% end %>
   </div>
 
