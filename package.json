@@ -1,7 +1,7 @@
 {
   "name": "@matthewkennedy/spree-checkout",
   "version": "0.0.1",
-  "description": "The Default Checkout For Spree Frontend",
+  "description": "A stand alone checkout for Spree",
   "module": "app/javascript/spree/checkout/index.js",
   "main": "app/assets/javascripts/spree_checkout.esm.js",
   "browser": "app/assets/javascripts/spree_checkout.min.js",
