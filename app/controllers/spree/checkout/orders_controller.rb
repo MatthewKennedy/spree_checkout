@@ -187,7 +187,7 @@ module Spree
       end
 
       def permitted_checkout_attributes
-        super + [:use_shipping, :state_lock_version]
+        super + [:use_shipping]
       end
     end
   end

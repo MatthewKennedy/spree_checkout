@@ -17,7 +17,6 @@
 <%= form_with model: @order, url: spree.checkout_path(@order.state) do |form| %>
   <div class=row>
     <div class=col-12 data-hook=checkout_form_wrapper>
-      <%= form.hidden_field :state_lock_version %>
       <%= render @order.state, form: form %>
     </div>
   </div>
