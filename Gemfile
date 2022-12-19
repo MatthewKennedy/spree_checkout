@@ -42,15 +42,14 @@ end
 
 group :test, :development do
   gem 'awesome_print'
-  gem 'gem-release'
-  gem 'redis'
-  gem 'rubocop', '~> 1.22.3', require: false # bumped
-  gem 'rubocop-rspec', require: false
-  gem 'pry-byebug'
-  gem 'webdrivers', '~> 4.1'
-  gem 'puma'
-  gem "standard", "1.9.0"
   gem 'ffaker'
+  gem 'gem-release'
+  gem 'pry-byebug'
+  gem 'puma'
+  gem 'redis'
+  gem "rubocop", "1.26.0"
+  gem "standard", "1.9.0"
+  gem "webdrivers", "~> 5.0"
 end
 
 spree_opts = { github: 'spree/spree', branch: ENV.fetch('SPREE_BRANCH', 'main') }
