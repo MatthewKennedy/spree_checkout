@@ -8,7 +8,7 @@ module Spree
     private
 
     def use_shipping?
-      use_shipping.in?([true, 'true', '1'])
+      use_shipping.in?([true, "true", "1"])
     end
 
     ::Spree::Order.prepend self if ::Spree::Order.included_modules.exclude?(self)

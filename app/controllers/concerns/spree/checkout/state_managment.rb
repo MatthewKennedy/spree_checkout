@@ -9,7 +9,7 @@ module Spree
       end
 
       def insufficient_payment?
-        params[:state] == 'confirm' &&
+        params[:state] == "confirm" &&
           @order.payment_required? &&
           @order.payments.valid.sum(:amount) != @order.total
       end
@@ -18,7 +18,7 @@ module Spree
         if unknown_state?
           @order.checkout_steps.first
         elsif insufficient_payment?
-          'payment'
+          "payment"
         else
           @order.state
         end
@@ -78,9 +78,9 @@ module Spree
         # if the user has a default address, a callback takes care of setting
         # that; but if he doesn't, we need to build an empty one here
         @order.bill_address ||= Address.new(country: current_store.default_country, user: try_spree_current_user)
-        if @order.checkout_steps.include?('delivery')
+        if @order.checkout_steps.include?("delivery")
           @order.ship_address ||= Address.new(country: current_store.default_country,
-                                              user: try_spree_current_user)
+            user: try_spree_current_user)
         end
 
         @bill_address ||= @order.bill_address
@@ -95,7 +95,7 @@ module Spree
       end
 
       def before_payment
-        if @order.checkout_steps.include? 'delivery'
+        if @order.checkout_steps.include? "delivery"
           packages = @order.shipments.map(&:to_package)
           @differentiator = Spree::Stock::Differentiator.new(@order, packages)
           @differentiator.missing.each do |variant, quantity|

@@ -11,9 +11,9 @@ module Spree
 
       def spree_checkout_zip_field_class(country)
         if spree_checkout_states_field_present?(country)
-          'col-4'
+          "col-4"
         else
-          'col-6'
+          "col-6"
         end
       end
 
@@ -25,8 +25,8 @@ module Spree
             memo << current_store.states_available_for_checkout(country)
           end.flatten
 
-          try_spree_current_user.addresses.
-            where(country_id: states.pluck(:country_id).uniq)
+          try_spree_current_user.addresses
+            .where(country_id: states.pluck(:country_id).uniq)
         end
       end
     end

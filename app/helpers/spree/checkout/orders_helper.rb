@@ -7,9 +7,9 @@ module Spree
 
       def spree_checkout_toaste_class(kind: :notice)
         if kind == :error
-          'text-bg-danger'
+          "text-bg-danger"
         else
-          'text-bg-dark'
+          "text-bg-dark"
         end
       end
 
@@ -26,14 +26,14 @@ module Spree
       end
 
       def spree_checkout_flash_messages(opts = {})
-        flashes = ''
+        flashes = ""
         excluded_types = opts[:excluded_types].to_a.map(&:to_s)
 
-        flash.to_h.except('order_completed').each do |msg_type, text|
+        flash.to_h.except("order_completed").each do |msg_type, text|
           next if msg_type.blank? || excluded_types.include?(msg_type)
 
           flashes << content_tag(:div, class: "alert alert-#{class_for(msg_type)} mb-0") do
-            content_tag(:button, '&times;'.html_safe, class: 'close', data: { dismiss: 'alert', hidden: true }) +
+            content_tag(:button, "&times;".html_safe, class: "close", data: {dismiss: "alert", hidden: true}) +
               content_tag(:span, text)
           end
         end
@@ -49,18 +49,18 @@ module Spree
 
       def spree_checkout_logo(image_path = nil, options = {})
         logo_attachment = if defined?(Spree::StoreLogo) && current_store.logo.is_a?(Spree::StoreLogo)
-                            current_store.logo.attachment # Spree v5
-                          else
-                            current_store.logo # Spree 4.x
-                          end
+          current_store.logo.attachment # Spree v5
+        else
+          current_store.logo # Spree 4.x
+        end
 
         image_path ||= if logo_attachment&.attached? && logo_attachment&.variable?
-                         main_app.cdn_image_url(logo_attachment.variant(resize: '244x104>'))
-                       elsif logo_attachment&.attached? && logo_attachment&.image?
-                         main_app.cdn_image_url(current_store.logo)
-                       else
-                         asset_path('spree/checkout/spree-logo.svg')
-                       end
+          main_app.cdn_image_url(logo_attachment.variant(resize: "244x104>"))
+        elsif logo_attachment&.attached? && logo_attachment&.image?
+          main_app.cdn_image_url(current_store.logo)
+        else
+          asset_path("spree/checkout/spree-logo.svg")
+        end
 
         path = spree.respond_to?(:checkout_root_path) ? spree.checkout_root_path : main_app.checkout_root_path
 
@@ -102,25 +102,25 @@ module Spree
           current_index = states.index(@order.state)
           state_index = states.index(state)
 
-          css_classes << 'next' if state_index == current_index + 1
-          css_classes << 'active' if state == @order.state
-          css_classes << 'first' if state_index == 0
-          css_classes << 'last' if state_index == states.length - 1
+          css_classes << "next" if state_index == current_index + 1
+          css_classes << "active" if state == @order.state
+          css_classes << "first" if state_index == 0
+          css_classes << "last" if state_index == states.length - 1
 
           if state_index < current_index
-            css_classes << 'completed'
-            text = link_to text, checkout_state_path(state), class: css_classes.join(' ')
+            css_classes << "completed"
+            text = link_to text, checkout_state_path(state), class: css_classes.join(" ")
           end
 
           if state_index > current_index
-            content_tag('span', text, class: 'cart-progress text-muted')
+            content_tag("span", text, class: "cart-progress text-muted")
           else
-            content_tag('span', text, class: 'cart-progress')
+            content_tag("span", text, class: "cart-progress")
           end
         end
 
-        content_tag(:div, raw("<span class='cart-progress'><a href='#{spree.cart_path}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join('')),
-                    class: "steps-container text-center step-#{@order.state}", id: 'checkout-steps')
+        content_tag(:div, raw("<span class='cart-progress'><a href='#{spree.cart_path}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join("")),
+          class: "steps-container text-center step-#{@order.state}", id: "checkout-steps")
       end
     end
   end

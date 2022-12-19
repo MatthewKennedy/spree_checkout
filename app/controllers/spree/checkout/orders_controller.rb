@@ -23,9 +23,10 @@ module Spree
 
       rescue_from Spree::Core::GatewayError, with: :rescue_from_spree_gateway_error
 
-      layout 'spree/layouts/spree_checkout'
+      layout "spree/layouts/spree_checkout"
 
-      def edit; end
+      def edit
+      end
 
       # update
       # Updates the order and advances to the next state (when possible).
@@ -39,7 +40,7 @@ module Spree
 
           if @order.completed?
             @current_order = nil
-            flash['order_completed'] = true
+            flash["order_completed"] = true
             redirect_to completion_route
           else
             redirect_to spree.checkout_state_path(@order.state)
@@ -60,7 +61,7 @@ module Spree
         @order.send(params[:address_kind]).state = nil
 
         respond_with(@order) do |format|
-          format.turbo_stream { render :change_address_country, locals: { address_kind: params[:address_kind] } }
+          format.turbo_stream { render :change_address_country, locals: {address_kind: params[:address_kind]} }
         end
       end
 
@@ -76,11 +77,11 @@ module Spree
           @order.reload
 
           respond_with(@order) do |format|
-            format.turbo_stream { render :update_summary, locals: { response_message: @result.success, kind: :notify } }
+            format.turbo_stream { render :update_summary, locals: {response_message: @result.success, kind: :notify} }
           end
         else
           respond_with(@order) do |format|
-            format.turbo_stream { render :update_summary, locals: { response_message: @result.error, kind: :error } }
+            format.turbo_stream { render :update_summary, locals: {response_message: @result.error, kind: :error} }
           end
         end
       end
@@ -96,11 +97,11 @@ module Spree
           @order.reload
 
           respond_with(@order) do |format|
-            format.turbo_stream { render :update_summary, locals: { response_message: @result.success, kind: :notify } }
+            format.turbo_stream { render :update_summary, locals: {response_message: @result.success, kind: :notify} }
           end
         else
           respond_with(@order) do |format|
-            format.turbo_stream { render :update_summary, locals: { response_message: @result.error, kind: :error } }
+            format.turbo_stream { render :update_summary, locals: {response_message: @result.error, kind: :error} }
           end
         end
       end
@@ -170,7 +171,7 @@ module Spree
       end
 
       def set_cache_header
-        response.headers['Cache-Control'] = 'no-store'
+        response.headers["Cache-Control"] = "no-store"
       end
 
       def add_store_credit_service

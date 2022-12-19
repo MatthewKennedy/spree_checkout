@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'checkout with unshippable items', type: :feature, inaccessible: true do
+describe "checkout with unshippable items", type: :feature, inaccessible: true do
   let!(:stock_location) { create(:stock_location) }
   let(:order) { OrderWalkthrough.up_to(:delivery) }
 
@@ -22,13 +22,13 @@ describe 'checkout with unshippable items', type: :feature, inaccessible: true d
     allow_any_instance_of(Spree::CheckoutController).to receive_messages(ensure_sufficient_stock_lines: true)
   end
 
-  it 'removes but does not display' do
+  it "removes but does not display" do
     visit spree.checkout_state_path(:delivery)
     expect(order.line_items.count).to eq 2
-    expect(page).to_not have_css('.shipment.unshippable')
-    expect(page).to_not have_content('Unshippable Items')
+    expect(page).to_not have_css(".shipment.unshippable")
+    expect(page).to_not have_content("Unshippable Items")
 
-    click_button 'Save and Continue'
+    click_button "Save and Continue"
 
     order.reload
     expect(order.line_items.count).to eq 1

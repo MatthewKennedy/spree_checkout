@@ -1,1 +1,1 @@
-require 'spree/checkout'
+require "spree/checkout"

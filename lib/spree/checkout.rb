@@ -1,8 +1,8 @@
-require 'spree_core'
-require 'spree_api'
+require "spree_core"
+require "spree_api"
 
-require 'inline_svg'
-require 'turbo-rails'
-require 'responders'
+require "inline_svg"
+require "turbo-rails"
+require "responders"
 
-require 'spree/checkout/engine'
+require "spree/checkout/engine"

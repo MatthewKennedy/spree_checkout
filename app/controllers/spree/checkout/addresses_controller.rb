@@ -16,7 +16,7 @@ module Spree
       end
 
       def edit
-        session['spree_user_return_to'] = request.env['HTTP_REFERER']
+        session["spree_user_return_to"] = request.env["HTTP_REFERER"]
       end
 
       def new
@@ -36,10 +36,11 @@ module Spree
         @address.destroy
 
         flash[:notice] = Spree.t(:successfully_removed, scope: :address_book)
-        redirect_to(request.env['HTTP_REFERER'] || addresses_path) unless request.xhr?
+        redirect_to(request.env["HTTP_REFERER"] || addresses_path) unless request.xhr?
       end
 
-      def address_manager; end
+      def address_manager
+      end
 
       private
 

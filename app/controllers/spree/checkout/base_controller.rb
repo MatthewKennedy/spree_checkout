@@ -12,9 +12,9 @@ module Spree
 
       respond_to :html
 
-      helper 'spree/base'
-      helper 'spree/locale'
-      helper 'spree/currency'
+      helper "spree/base"
+      helper "spree/locale"
+      helper "spree/currency"
 
       helper_method :title
       helper_method :title=

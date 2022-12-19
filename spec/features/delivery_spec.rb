@@ -1,15 +1,15 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'Delivery', type: :feature, inaccessible: true, js: true do
-  include_context 'checkout setup'
+describe "Delivery", type: :feature, inaccessible: true, js: true do
+  include_context "checkout setup"
 
   let(:store) { Spree::Store.default }
   let(:country) { store.default_country }
-  let(:state) { create(:state, name: 'Alabama', abbr: 'AL', country: country) }
+  let(:state) { create(:state, name: "Alabama", abbr: "AL", country: country) }
   let(:user) { create(:user) }
-  let(:promotion) { create(:promotion, name: 'Free Shipping', starts_at: 1.day.ago, expires_at: 1.day.from_now) }
+  let(:promotion) { create(:promotion, name: "Free Shipping", starts_at: 1.day.ago, expires_at: 1.day.from_now) }
   let!(:shipping_method2) do
-    sm = create(:shipping_method, name: 'Shipping Method2')
+    sm = create(:shipping_method, name: "Shipping Method2")
     sm.calculator.preferred_amount = 20
     sm.calculator.save
     sm
@@ -17,13 +17,13 @@ describe 'Delivery', type: :feature, inaccessible: true, js: true do
 
   def add_mug_and_navigate_to_delivery_page
     add_to_cart(mug) do
-      click_link 'Checkout'
+      click_link "Checkout"
     end
 
-    fill_in 'order_email', with: 'test@example.com'
+    fill_in "order_email", with: "test@example.com"
     fill_in_address
 
-    click_button 'Save and Continue'
+    click_button "Save and Continue"
   end
 
   before do
@@ -32,42 +32,42 @@ describe 'Delivery', type: :feature, inaccessible: true, js: true do
     shipping_method.calculator.save
   end
 
-  describe 'shipping total gets updated when shipping method is changed in the delivery step' do
+  describe "shipping total gets updated when shipping method is changed in the delivery step" do
     before do
       add_mug_and_navigate_to_delivery_page
     end
 
-    it 'contains the shipping total' do
-      expect(page).to have_css('.checkout-content-summary-table', text: '$10.00')
+    it "contains the shipping total" do
+      expect(page).to have_css(".checkout-content-summary-table", text: "$10.00")
     end
 
-    context 'shipping method is changed' do
-      before { find('label', text: shipping_method2.name).click }
+    context "shipping method is changed" do
+      before { find("label", text: shipping_method2.name).click }
 
-      it 'shipping total and order total both are updates' do
-        expect(page).to have_css('.checkout-content-summary-table', text: '$20.00')
+      it "shipping total and order total both are updates" do
+        expect(page).to have_css(".checkout-content-summary-table", text: "$20.00")
       end
     end
   end
 
-  describe 'shipping address is displayed on delivery page' do
+  describe "shipping address is displayed on delivery page" do
     before do
       add_mug_and_navigate_to_delivery_page
     end
 
-    it 'contains the correct address' do
+    it "contains the correct address" do
       expect(page).to have_text "SHIPPING TO: #{@street.upcase} - #{@zipcode.upcase} - US"
     end
   end
 
-  context 'custom currency markers' do
+  context "custom currency markers" do
     before do
-      Spree::Money.default_formatting_rules[:decimal_mark] = ','
-      Spree::Money.default_formatting_rules[:thousands_separator] = '.'
+      Spree::Money.default_formatting_rules[:decimal_mark] = ","
+      Spree::Money.default_formatting_rules[:thousands_separator] = "."
 
       add_mug_and_navigate_to_delivery_page
 
-      find('label', text: shipping_method2.name).click
+      find("label", text: shipping_method2.name).click
     end
 
     after do
@@ -75,16 +75,16 @@ describe 'Delivery', type: :feature, inaccessible: true, js: true do
       Spree::Money.default_formatting_rules.delete(:thousands_separator)
     end
 
-    it 'calculates shipping total correctly with different currency marker' do
-      expect(page).to have_css('.checkout-content-summary-table', text: '$20,00')
+    it "calculates shipping total correctly with different currency marker" do
+      expect(page).to have_css(".checkout-content-summary-table", text: "$20,00")
     end
 
-    it 'calculates order total correctly with different currency marker' do
-      expect(page).to have_css('.checkout-content-summary-table', text: '$39,99')
+    it "calculates order total correctly with different currency marker" do
+      expect(page).to have_css(".checkout-content-summary-table", text: "$39,99")
     end
   end
 
-  context 'with free shipping promotion' do
+  context "with free shipping promotion" do
     before do
       action = Spree::Promotion::Actions::FreeShipping.new
       action.promotion = promotion
@@ -92,18 +92,18 @@ describe 'Delivery', type: :feature, inaccessible: true, js: true do
       promotion.reload
 
       add_mug_and_navigate_to_delivery_page
-      find('label', text: shipping_method2.name).click
+      find("label", text: shipping_method2.name).click
     end
 
-    it 'total does not change after changing delivery option' do
-      expect(page).to have_css('#summary-order-total', text: '$19.99')
+    it "total does not change after changing delivery option" do
+      expect(page).to have_css("#summary-order-total", text: "$19.99")
     end
   end
 
   def fill_in_address
     @street = FFaker::Address.street_address
     @zipcode = FFaker::AddressUS.zip_code
-    address = 'order_bill_address_attributes'
+    address = "order_bill_address_attributes"
     fill_in "#{address}_firstname", with: FFaker::Name.first_name
     fill_in "#{address}_lastname", with: FFaker::Name.last_name
     fill_in "#{address}_address1", with: @street

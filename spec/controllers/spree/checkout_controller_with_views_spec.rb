@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 # This spec is useful for when we just want to make sure a view is rendering correctly
 # Walking through the entire checkout process is rather tedious, don't you think?
 describe Spree::CheckoutController, type: :controller do
   render_views
-  let(:token) { 'some_token' }
+  let(:token) { "some_token" }
   let(:user) { stub_model(Spree::LegacyUser) }
   let(:store) { Spree::Store.default }
 
@@ -13,12 +13,12 @@ describe Spree::CheckoutController, type: :controller do
   end
 
   # Regression test for #3246
-  context 'when using GBP' do
+  context "when using GBP" do
     before do
-      store.update(default_currency: 'GBP')
+      store.update(default_currency: "GBP")
     end
 
-    context 'when order is in delivery' do
+    context "when order is in delivery" do
       before do
         # Using a let block won't acknowledge the currency setting
         # Therefore we just do it like this...
@@ -26,10 +26,10 @@ describe Spree::CheckoutController, type: :controller do
         allow(controller).to receive_messages current_order: order
       end
 
-      it 'displays rate cost in correct currency' do
+      it "displays rate cost in correct currency" do
         get :edit
         html = Nokogiri::HTML(response.body)
-        expect(html.css('.rate-cost').text).to eq '£10.00'
+        expect(html.css(".rate-cost").text).to eq "£10.00"
       end
     end
   end

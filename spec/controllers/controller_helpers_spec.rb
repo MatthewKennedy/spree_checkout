@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 # In this file, we want to test that the controller helpers function correctly
 # So we need to use one of the controllers inside Spree.
@@ -20,35 +20,35 @@ describe Spree::ProductsController, type: :controller do
   end
 
   # Regression test for #1184
-  context 'when session locale not set' do
+  context "when session locale not set" do
     before do
       session[:locale] = nil
     end
 
-    context 'when Spree::Checkout::Config[:locale] not present' do
+    context "when Spree::Checkout::Config[:locale] not present" do
       before do
         Spree::Checkout::Config[:locale] = nil
       end
 
-      context 'when rails application default locale not set' do
+      context "when rails application default locale not set" do
         before do
           Rails.application.config.i18n.default_locale = nil
         end
 
-        it 'sets the I18n default locale' do
+        it "sets the I18n default locale" do
           get :index
           expect(I18n.locale).to eq(I18n.default_locale)
         end
       end
 
-      context 'when rails application default locale is set' do
-        context 'and in available_locales' do
+      context "when rails application default locale is set" do
+        context "and in available_locales" do
           before do
             Spree::Store.default.update(default_locale: nil, supported_locales: nil)
             Rails.application.config.i18n.default_locale = available_locale
           end
 
-          it 'sets the rails app locale' do
+          it "sets the rails app locale" do
             expect(I18n.locale).to eq(:en)
             get :index
             expect(I18n.locale).to eq(available_locale)
@@ -57,25 +57,25 @@ describe Spree::ProductsController, type: :controller do
       end
     end
 
-    context 'when Spree::Checkout::Config[:locale] is present' do
-      context 'and not in available_locales' do
+    context "when Spree::Checkout::Config[:locale] is present" do
+      context "and not in available_locales" do
         before do
           Spree::Checkout::Config[:locale] = unavailable_locale
         end
 
         # FIXME: after adding supported_locales to Store this should be testable again
-        xit 'sets the I18n default locale' do
+        xit "sets the I18n default locale" do
           get :index
           expect(I18n.locale).to eq(I18n.default_locale)
         end
       end
 
-      context 'and not in available_locales' do
+      context "and not in available_locales" do
         before do
           Spree::Checkout::Config[:locale] = available_locale
         end
 
-        it 'sets the default locale based on Spree::Checkout::Config[:locale]' do
+        it "sets the default locale based on Spree::Checkout::Config[:locale]" do
           expect(I18n.locale).to eq(:en)
           get :index
           expect(I18n.locale).to eq(available_locale)

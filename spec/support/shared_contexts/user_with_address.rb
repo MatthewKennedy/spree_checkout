@@ -1,4 +1,4 @@
-shared_context 'user with address' do
+shared_context "user with address" do
   let(:state) { Spree::State.all.first || create(:state) }
 
   let(:address) do
