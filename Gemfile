@@ -44,7 +44,6 @@ end
 
 group :test, :development do
   gem "gem-release"
-  gem "redis"
   gem "rubocop"
   gem "standard"
 end
