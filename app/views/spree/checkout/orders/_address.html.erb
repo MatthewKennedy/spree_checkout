@@ -1,9 +1,25 @@
 <% if !try_spree_current_user || try_spree_current_user.email.blank? %>
   <div class="row">
     <div class="col-12 mb-4">
-      <div class="form-group checkout-content-inner-field has-float-label">
-        <%= form.email_field :email, class: 'required spree-flat-input', required: true, placeholder: Spree.t(:email) %>
-        <%= form.label :email, class: 'text-uppercase' %>
+      <div class="d-flex">
+        <div class=flex-fill>
+          <h5>
+            <%= I18n.t('spree_checkout.contact_information') %>
+          </h5>
+        </div>
+        <div>
+          <span class="text-muted"><%= I18n.t('spree_checkout.already_have_an_account') %></span> <%= link_to(I18n.t('spree_checkout.log_in'), spree.checkout_users_login_path, data: { turbo_frame: :modal }) %>
+        </div>
+      </div>
+
+      <div class="form-floating mb-1">
+        <%= form.email_field :email, required: true, placeholder: Spree.t(:email) %>
+        <%= form.label :email %>
+      </div>
+
+      <div class="form-check">
+        <%= form.check_box :use_shipping, { class: 'form-check-input' }, true, @order.shipping_eq_billing_address? %>
+        <%= form.label :use_shipping, I18n.t('spree_checkout.email_me_news_and_promotions') %>
       </div>
     </div>
   </div>

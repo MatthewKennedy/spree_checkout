@@ -1,12 +1,14 @@
 Spree::Core::Engine.add_routes do
   scope "(:locale)", locale: /#{Spree.available_locales.join('|')}/, defaults: {locale: nil} do
-    # TODO
-    # Set this so that a config defines the return cart path, not a route
-    # because we want to have the Spree StoreFront still usable, and
-    get "/cart", to: "orders#edit", as: :cart
-    resources :orders, only: [:show]
+    unless Spree::Checkout::Engine.frontend_available?
+      get "/cart", to: "orders#edit", as: :cart
+      resources :orders, only: [:show]
+    end
 
     namespace :checkout do
+      namespace :users do
+        get :login
+      end
       resources :addresses do
         collection do
           get :address_manager
