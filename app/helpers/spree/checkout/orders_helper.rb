@@ -64,7 +64,7 @@ module Spree
 
         path = spree.respond_to?(:checkout_root_path) ? spree.checkout_root_path : main_app.checkout_root_path
 
-        link_to path, 'aria-label': current_store.name, method: options[:method] do
+        link_to path, "aria-label": current_store.name, method: options[:method] do
           image_tag image_path, alt: current_store.name, title: current_store.name
         end
       end

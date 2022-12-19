@@ -27,29 +27,23 @@ group :test do
   gem "database_cleaner", "~> 2.0"
   gem "email_spec"
   gem "factory_bot_rails", "~> 6.0"
-  gem "multi_json"
+  gem "ffaker"
   gem "rspec-activemodel-mocks", "~> 1.0"
   gem "rspec-rails", "~> 5.0"
   gem "rspec-retry"
   gem "rspec_junit_formatter"
   gem "rswag-specs"
-  gem "jsonapi-rspec"
-  gem "simplecov", "0.17.1"
-  gem "webmock", "~> 3.7"
-  gem "timecop"
   gem "rails-controller-testing"
+  gem "timecop"
+  gem "webdrivers", "~> 5.0"
+  gem "webmock", "~> 3.7"
 end
 
 group :test, :development do
-  gem "awesome_print"
-  gem "ffaker"
   gem "gem-release"
-  gem "pry-byebug"
-  gem "puma"
   gem "redis"
-  gem "rubocop", "1.26.0"
-  gem "standard", "1.9.0"
-  gem "webdrivers", "~> 5.0"
+  gem "rubocop"
+  gem "standard"
 end
 
 spree_opts = {github: "spree/spree", branch: ENV.fetch("SPREE_BRANCH", "main")}
