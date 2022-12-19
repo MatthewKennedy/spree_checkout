@@ -49,6 +49,7 @@ group :test, :development do
   gem 'pry-byebug'
   gem 'webdrivers', '~> 4.1'
   gem 'puma'
+  gem "standard", "1.9.0"
   gem 'ffaker'
 end
 
