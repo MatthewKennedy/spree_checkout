@@ -12735,6 +12735,80 @@
       input.disabled = true;
     }
   }
+  class src_default extends Controller {
+    connect() {
+      this.checkForChanges();
+    }
+    watchTargetConnected(target) {
+      this.attachActionAttributes(target);
+      this.checkForChanges();
+    }
+    watchTargetDisconnect() {
+      this.checkForChanges();
+    }
+    checkForChanges() {
+      const changeCount = [];
+      this.watchTargets.forEach((formEl => {
+        if (formEl.type === "checkbox" || formEl.type === "radio") {
+          if (formEl.checked !== formEl.defaultChecked) changeCount.push(1);
+        } else if (formEl.tagName === "SELECT") {
+          if (this.handleSelectChange(formEl) === true) changeCount.push(1);
+        } else {
+          if (formEl.value !== formEl.defaultValue) changeCount.push(1);
+        }
+      }));
+      if (changeCount.length > 0) {
+        this.enableChangeControles();
+      } else {
+        this.disableChangeControles();
+      }
+    }
+    enableChangeControles() {
+      if (this.hasSaveButtonTarget) this.saveButtonTarget.disabled = false;
+    }
+    disableChangeControles() {
+      if (this.hasSaveButtonTarget) this.saveButtonTarget.disabled = true;
+    }
+    handleSelectChange(selectEl) {
+      let hasChanged = false;
+      let defaultSelected = 0;
+      let i;
+      let optionsCount;
+      let option;
+      for (i = 0, optionsCount = selectEl.options.length; i < optionsCount; i++) {
+        option = selectEl.options[i];
+        hasChanged = hasChanged || option.selected !== option.defaultSelected;
+        if (option.defaultSelected) defaultSelected = i;
+      }
+      if (hasChanged && !selectEl.multiple) hasChanged = defaultSelected !== selectEl.selectedIndex;
+      if (hasChanged) return true;
+    }
+    attachActionAttributes(target) {
+      if (target.hasAttribute("data-action")) {
+        if (target.dataset.action.includes(`${this.identifier}#checkForChanges`)) return;
+      }
+      if (target.hasAttribute("data-action")) {
+        target.setAttribute("data-action", `${this.identifier}#checkForChanges ${target.dataset.action}`);
+      } else {
+        target.setAttribute("data-action", `${this.identifier}#checkForChanges`);
+      }
+    }
+  }
+  src_default.targets = [ "saveButton", "watch" ];
+  class FormStateController extends src_default {
+    enableChangeControles() {
+      const globalSubmitButton = document.getElementById("globalFormSubmitButton");
+      super.enableChangeControles();
+      if (this.hasSaveButtonTarget) this.saveButtonTarget.disabled = false;
+      if (globalSubmitButton) globalSubmitButton.disabled = false;
+    }
+    disableChangeControles() {
+      const globalSubmitButton = document.getElementById("globalFormSubmitButton");
+      super.disableChangeControles();
+      if (this.hasSaveButtonTarget) this.saveButtonTarget.disabled = true;
+      if (globalSubmitButton) globalSubmitButton.disabled = true;
+    }
+  }
   class FormValidationController extends Controller {
     static targets=[ "submitBtn" ];
     connect() {
@@ -12781,6 +12855,7 @@
   window.Stimulus = Application.start();
   Stimulus.register("input--card-validation", InputCardValidationController);
   Stimulus.register("input--disable-enable", InputDisabledController);
+  Stimulus.register("form--state", FormStateController);
   Stimulus.register("form--validation", FormValidationController);
   Stimulus.register("modal", ModalController);
   Stimulus.register("toast", ToastController);

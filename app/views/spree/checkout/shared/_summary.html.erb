@@ -25,17 +25,17 @@
       <% if Spree::Checkout::Config[:coupon_codes_enabled] %>
         <hr>
 
-        <%= form_with model: @order, url: spree.checkout_apply_coupon_path do |form| %>
+        <%= form_with model: @order, url: spree.checkout_apply_coupon_path, data: { controller: 'form--state' } do |form| %>
           <div class="d-flex" id="discount-apply">
             <div class="flex-fill">
               <div class="form-floating">
-                <%= form.text_field :coupon_code, placeholder: I18n.t('spree_checkout.discount_code'), class: 'form-control text-uppercase' %>
+                <%= form.text_field :coupon_code, placeholder: I18n.t('spree_checkout.discount_code'), class: 'form-control text-uppercase', data: { form__state_target: 'watch' } %>
                 <%= form.label :coupon_code, I18n.t('spree_checkout.discount_code') %>
               </div>
             </div>
 
             <div>
-              <%= button_tag I18n.t('spree_checkout.apply'), class: 'btn btn-secondary ms-2' %>
+              <%= button_tag I18n.t('spree_checkout.apply'), class: 'btn btn-secondary ms-2', data: {form__state_target: 'saveButton'} %>
             </div>
           </div>
         <% end %>
