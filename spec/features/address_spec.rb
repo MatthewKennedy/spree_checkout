@@ -136,7 +136,7 @@ describe "Address", type: :feature, inaccessible: true do
         expect(page).to have_css(@state_name_css, filter_set: :field, disabled: true, visible: :hidden)
       end
 
-      it "adds state-select-label to the lable class list" do
+      it "adds state-select-label to the label class list" do
         select canada.name, from: @country_css
         expect(page).to have_css("label.state-select-label")
       end
