@@ -29,6 +29,8 @@ group :test do
   gem "factory_bot_rails", "~> 6.0"
   gem "ffaker"
   gem "propshaft"
+  gem "puma", "~> 5.0"
+  gem "redis"
   gem "rspec-activemodel-mocks", "~> 1.0"
   gem "rspec-rails", "~> 5.0"
   gem "rspec-retry"
