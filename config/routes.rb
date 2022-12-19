@@ -4,6 +4,7 @@ Spree::Core::Engine.add_routes do
     # Set this so that a config defines the return cart path, not a route
     # because we want to have the Spree StoreFront still usable, and
     get "/cart", to: "orders#edit", as: :cart
+    resources :orders, only: [:show]
 
     namespace :checkout do
       resources :addresses do
@@ -21,6 +22,9 @@ Spree::Core::Engine.add_routes do
       patch "update_shipping_choice", to: "orders#update_shipping_choice"
 
       post "change_address_country", to: "orders#change_address_country"
+
+      get :forbidden, to: "errors#forbidden", as: :forbidden
+      get :unauthorized, to: "errors#unauthorized", as: :unauthorized
     end
   end
 end

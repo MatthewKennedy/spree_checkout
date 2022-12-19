@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Spree::CheckoutController, type: :controller do
+describe Spree::Checkout::OrdersController, type: :controller do
   let(:store) { Spree::Store.default }
   let(:country) { store.default_country }
   let(:state) { country.states.first }

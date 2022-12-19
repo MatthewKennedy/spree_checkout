@@ -1,6 +1,7 @@
 if ENV["COVERAGE"]
   # Run Coverage report
   require "simplecov"
+
   SimpleCov.start "rails" do
     add_group "Libraries", "lib/spree"
 
@@ -18,7 +19,7 @@ end
 ENV["RAILS_ENV"] ||= "test"
 
 begin
-  require File.expand_path("../dummy/config/environment", __FILE__)
+  require File.expand_path("../../tmp/dummy/config/environment", __FILE__)
 rescue LoadError
   puts "Could not load dummy application. Please ensure you have run `bundle exec rake test_app`"
   exit
@@ -45,7 +46,7 @@ require "spree/testing_support/locale_helpers"
 require "webdrivers"
 
 # Requires supporting files with custom matchers and macros, etc,
-# in ./support/ and its subdirectories.
+# in ./support/ and its sub directories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
 
 def wait_for_turbo
@@ -87,6 +88,7 @@ RSpec.configure do |config|
     else
       :transaction
     end
+
     # TODO: Find out why open_transactions ever gets below 0
     # See issue #3428
     ApplicationRecord.connection.increment_open_transactions if ApplicationRecord.connection.open_transactions < 0
