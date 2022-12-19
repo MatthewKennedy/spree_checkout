@@ -507,7 +507,7 @@ describe "Checkout", type: :feature, inaccessible: true, js: true do
     end
 
     context "invalid coupon" do
-      it "doesnt create a payment record" do
+      it "does not create a payment record" do
         find("#order_coupon_code").fill_in with: "invalid"
         find("#shopping-cart-coupon-code-button").click
 
@@ -516,7 +516,7 @@ describe "Checkout", type: :feature, inaccessible: true, js: true do
       end
     end
 
-    context "doesn't fill in coupon code input" do
+    context "does not fill in coupon code input" do
       it "advances just fine" do
         click_on "checkout"
         expect(page).to have_current_path(spree.checkout_state_path("address"))

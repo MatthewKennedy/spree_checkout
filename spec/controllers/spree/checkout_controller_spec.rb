@@ -289,7 +289,7 @@ describe Spree::CheckoutController, type: :controller do
 
               it_behaves_like "created address assigned to current user"
 
-              context "when save_user_addresss is falsy" do
+              context "when save_user_addresss is false" do
                 let(:save_user_address) { nil }
 
                 it "does not assign created address to current user" do
@@ -486,7 +486,7 @@ describe Spree::CheckoutController, type: :controller do
 
               it_behaves_like "created address assigned to current user"
 
-              context "when save_user_addresss is falsy" do
+              context "when save_user_addresss is false" do
                 let(:save_user_address) { nil }
 
                 it "does not assign created address to current user" do
@@ -510,7 +510,7 @@ describe Spree::CheckoutController, type: :controller do
 
             context "when submitted bill address already exists" do
               let!(:bill_address) { create(:address, city: "Chicago", user: nil) }
-              let(:order) { create(:order_with_totals, store: store, bill_address: nil, ship_address: nil, state: "address", user: nil, email: "exaple@email.com") }
+              let(:order) { create(:order_with_totals, store: store, bill_address: nil, ship_address: nil, state: "address", user: nil, email: "example@email.com") }
               let(:bill_address_params) { bill_address.attributes.except(:id, :user_id, :created_at, :updated_at) }
 
               it "keeps address unassigned" do
@@ -601,12 +601,12 @@ describe Spree::CheckoutController, type: :controller do
             order.update_columns(state_lock_version: 1, state: "address")
           end
 
-          it "order should receieve ensure_valid_order_version callback" do
+          it "order should receive ensure_valid_order_version callback" do
             expect_any_instance_of(described_class).to receive(:ensure_valid_state_lock_version)
             post :update, params: post_params
           end
 
-          it "order should receieve with_lock message" do
+          it "order should receive with_lock message" do
             expect(order).to receive(:with_lock)
             post :update, params: post_params
           end
