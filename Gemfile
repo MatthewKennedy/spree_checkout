@@ -28,6 +28,9 @@ group :test do
   gem "email_spec"
   gem "factory_bot_rails", "~> 6.0"
   gem "ffaker"
+  gem "propshaft"
+  gem "puma", "~> 5.0"
+  gem "redis"
   gem "rspec-activemodel-mocks", "~> 1.0"
   gem "rspec-rails", "~> 5.0"
   gem "rspec-retry"
@@ -41,7 +44,6 @@ end
 
 group :test, :development do
   gem "gem-release"
-  gem "redis"
   gem "rubocop"
   gem "standard"
 end
