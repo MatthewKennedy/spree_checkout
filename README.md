@@ -19,6 +19,12 @@ Additionally, Spree Checkout is both Propshaft and Sprockets ready.
 
 Add
 ```ruby
+# TEMP TESTING SPREE FRONTEND
+gem 'spree_frontend', github: 'spree/spree_legacy_frontend', branch: 'feature/use-spree-checkout'
+
+# TEMP FOR AUTH DEVISE
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'feature/prep-for-stand-alone-checkout'
+
 gem 'spree_checkout'
 ```
 to your `Gemfile`.

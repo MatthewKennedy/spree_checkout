@@ -1,6 +1,6 @@
 module Spree
   module Checkout
-    VERSION = "4.5.0".freeze
+    VERSION = "0.0.1".freeze
 
     def self.version
       VERSION
