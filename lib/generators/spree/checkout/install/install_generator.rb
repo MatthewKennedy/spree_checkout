@@ -2,7 +2,7 @@ module Spree
   module Checkout
     module Generators
       class InstallGenerator < Rails::Generators::Base
-        desc "Installs Spree Checkout For Store Frontend"
+        desc "Installs Spree Checkout"
 
         def install
         end

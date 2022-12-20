@@ -26,6 +26,8 @@ module Spree
 
       protected
 
+      default_form_builder(Spree::Checkout::BootstrapBuilder)
+
       # can be used in views as well as controllers.
       # e.g. <% self.title = 'This is a custom title for this view' %>
       attr_writer :title

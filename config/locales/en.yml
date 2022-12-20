@@ -1,6 +1,14 @@
 en:
   spree_checkout:
+    address:
+      emirate: Emirate
+      state_territory: State/Territory
+      state: State
+      post_code: Postcode
+      zipcode: Zipcode
     apply: Apply
+    already_have_an_account: Already have an account?
+    email_me_news_and_promotions: Email me with news and promotions
     bill_to: Bill to
     billing_address: Billing address
     expire_date_format: "Expiration date (MM/YY)"
@@ -8,6 +16,8 @@ en:
     each: each
     card_varifiction_code: Security code
     card_number: Card number
+    contact_information: Contact information
+    log_in: Log in
     change: change
     discount: Discount
     free: FREE
