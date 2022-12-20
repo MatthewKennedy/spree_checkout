@@ -9,7 +9,7 @@ A stand-alone checkout for Spree
 
 ## Usage
 
-Spree Checkout can be used with the existing **Spree StoreFront** and **Spree Backend**, either one, or as a stand alone Spree Extension to be used with
+Spree Checkout can be used with the existing **Spree StoreFront** and **Spree Backend**, either one, or as a stand-alone Spree Extension to be used with
 any third-party storefront or admin UI.
 
 Additionally, Spree Checkout is both Propshaft and Sprockets ready.
@@ -25,7 +25,7 @@ gem 'spree_frontend', github: 'spree/spree_legacy_frontend', branch: 'feature/us
 # TEMP FOR AUTH DEVISE
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'feature/prep-for-stand-alone-checkout'
 
-gem 'spree_checkout'
+gem 'spree_checkout', github: 'MatthewKennedy/spree_checkout'
 ```
 to your `Gemfile`.
 
