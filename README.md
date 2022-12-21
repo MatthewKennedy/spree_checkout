@@ -57,8 +57,6 @@ then restart your server.
 - [ ] Indicate user is logged in and display email
 - [ ] Allow links in footer to display form Checkout Menu created in Admin
 - [ ] Allow copyright to be editable in admin UI
-- [ ] Add indication when no Payment Methods are available
-- [ ] Write code for image lookup (variant / product / no image)
 - [ ] Fix Flash Messages
 - [ ] Write test suite for checkout flow
 - [ ] Ensure that the checkout works without any backend or frontend installed
