@@ -7,28 +7,28 @@
   <div class="container">
 
     <div class="col-12">
-      <%= form_for Spree.user_class.new, as: :spree_user, url: spree_login_path, data: { turbo: false } do |f| %>
-        <div id="password-credentials" class="mb-4">
-          <div class="form-floating mb-4">
+      <%= form_for Spree.user_class.new, as: :spree_user, url: spree_login_path do |f| %>
+        <div id="password-credentials">
+          <div class="form-floating mb-3">
             <%= f.email_field :email, placeholder: Spree.t(:email), value: params.dig(:spree_user, :email) %>
             <%= f.label :email, Spree.t(:email) %>
           </div>
-          <div class="form-floating mb-4">
+          <div class="form-floating mb-3">
             <%= f.password_field :password, placeholder: Spree.t(:password) %>
             <%= f.label :password, Spree.t(:password) %>
           </div>
         </div>
 
-        <div class="form-check">
+        <div class="form-check mb-3">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me, Spree.t(:remember_me) %>
         </div>
 
-        <%= f.submit Spree.t(:login), class: 'btn btn-primary btn-block spree-btn mt-2' %>
+        <%= f.submit Spree.t(:login), class: 'btn btn-primary w-100' %>
       <% end %>
 
       <% if spree.respond_to?(:recover_password_path) %>
-        <div class="text-center forgot-password mb-4">
+        <div class="text-center forgot-password mt-3">
           <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
         </div>
       <% end %>
@@ -37,9 +37,5 @@
   </div>
 <% end %>
 
-<% content_for :modal_footer do %>
-  <%#= remote_form_submit_button(@object) %>
-<% end %>
-
-<%= render partial: 'spree/checkout/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered modal-lg' } %>
+<%= render partial: 'spree/checkout/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered' } %>
 
