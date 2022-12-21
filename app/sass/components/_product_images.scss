@@ -12,8 +12,18 @@ div#cart-line-items {
     background: #fff;
     position: relative;
     border:1px solid var(--spree-checkout-border-color);
-    padding: 3px;
     margin: 5px 0;
+
+    .product-img {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 7px;
+
+      img {
+        max-width: 100%
+      }
+    }
 
     .product-image-container {
       display: flex;
@@ -37,5 +47,17 @@ div#cart-line-items {
     right: -0.75em;
     top: -0.75em;
     z-index: 3
+  }
+
+  .checkout-line-item-summary {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+
+      svg {
+        color:  lightgrey;
+        margin: auto;
+      }
+
   }
 }

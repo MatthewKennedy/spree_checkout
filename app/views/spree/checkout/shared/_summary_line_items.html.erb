@@ -1,13 +1,9 @@
 <% @order.line_items.each do |item| %>
   <div class=checkout-product-image>
     <% variant = item.variant %>
-    <% if variant.images.length == 0 %>
-      <span class="product-thumbnail-quantity" aria-hidden="true"><%= item.quantity %></span>
+    <span class="product-thumbnail-quantity" aria-hidden="true"><%= item.quantity %></span>
 
-      <%# TODO images %>
-      <%#= image_tag main_app.cdn_image_url(variant.url(:large)), width: '100', height: '100', loading: :lazy, class: "w-100 h-100 lazy" %>
-      <%#= product_image(variant) %>
-    <% end %>
+    <%= product_image(variant) %>
   </div>
 
   <div class="d-flex align-items-center">
