@@ -27,6 +27,7 @@ en:
     continue_to_payment: Continue to payment
     continue_to_delivery: Continue to shipping
     continue_to_complete: Complete order
+    no_payment_method_options_provided_contact_the_store_owner: No payment options are provided, pleasecontact the store owner.
     return_to_cart: Return to cart
     return_to_address: Return to address
     return_to_payment: Return to payment
