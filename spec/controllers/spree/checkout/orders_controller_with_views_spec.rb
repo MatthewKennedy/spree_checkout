@@ -1,7 +1,5 @@
 require "spec_helper"
 
-# This spec is useful for when we just want to make sure a view is rendering correctly
-# Walking through the entire checkout process is rather tedious, don't you think?
 describe Spree::Checkout::OrdersController, type: :controller do
   render_views
   let(:token) { "some_token" }

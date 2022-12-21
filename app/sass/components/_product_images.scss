@@ -14,20 +14,17 @@ div#cart-line-items {
     border:1px solid var(--spree-checkout-border-color);
     margin: 5px 0;
 
-    .product-img {
+    .product-image-inner {
       display: flex;
       width: 100%;
       overflow: hidden;
       border-radius: 7px;
+      justify-content: center;
+      align-items: center;
 
       img {
         max-width: 100%
       }
-    }
-
-    .product-image-container {
-      display: flex;
-      align-self: center;
     }
   }
 
