@@ -44,6 +44,7 @@ end
 
 group :test, :development do
   gem "gem-release"
+  gem "i18n-tasks"
   gem "rubocop"
   gem "standard"
 end

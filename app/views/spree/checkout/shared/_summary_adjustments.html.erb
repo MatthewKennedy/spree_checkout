@@ -1,7 +1,7 @@
 <%# SUBTOTAL %>
 <div id="subtotal" class="d-flex my-1" data-hook="order_summary">
   <div class="text-left flex-fill">
-    <%= Spree.t(:subtotal) %>
+    <%= I18n.t('spree_checkout.subtotal') %>
   </div>
   <div data-hook="order_item_total" class="text-end">
     <%= order.display_item_total %>
