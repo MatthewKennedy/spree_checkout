@@ -1,5 +1,6 @@
 en:
   spree_checkout:
+    addresses: Addresses
     address:
       emirate: Emirate
       state_territory: State/Territory
