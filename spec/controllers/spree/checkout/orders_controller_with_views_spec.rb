@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe Spree::Checkout::OrdersController, type: :controller do
   render_views
+
   let(:token) { "some_token" }
   let(:user) { stub_model(Spree::LegacyUser) }
   let(:store) { Spree::Store.default }
