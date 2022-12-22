@@ -13,6 +13,22 @@ module Spree
         end
       end
 
+      def spree_checkout_accordion_show_hide(index)
+        if index == 0
+          show_container = 'show'
+        else
+          show_container = ''
+        end
+      end
+
+      def spree_checkout_accordion_show_first(index)
+        if index == 0
+          show_first = true
+        else
+          show_first = false
+        end
+      end
+
       def spree_checkout_product_images(product, variants)
         if product.variants_and_option_values(current_currency).any?
           variants_without_master_images = variants.reject(&:is_master).map(&:images).flatten

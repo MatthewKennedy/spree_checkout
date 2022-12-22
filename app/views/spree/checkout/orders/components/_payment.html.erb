@@ -27,6 +27,7 @@
 <% end %>
 
 <% content_for :proceed_button do %>
+  <% # i18n-tasks-use I18n.t('spree_checkout.continue_to_confirm') %>
   <% # i18n-tasks-use I18n.t('spree_checkout.continue_to_complete') %>
   <%= submit_tag I18n.t("spree_checkout.continue_to_#{spree_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
 <% end %>

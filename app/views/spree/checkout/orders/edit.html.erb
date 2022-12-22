@@ -14,7 +14,7 @@
 
 <%= yield :attained_order_info %>
 
-<%= form_with model: @order, url: spree.checkout_path(@order.state) do |form| %>
+<%= form_with model: @order, url: spree.checkout_path(@order.state), method: :patch do |form| %>
   <div class=row>
     <div class=col-12 data-hook=checkout_form_wrapper>
       <%= render @order.state, form: form %>
