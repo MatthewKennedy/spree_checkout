@@ -54,6 +54,7 @@ then restart your server.
 ## TODO
 
 - [ ] Fix address management flow
+- [ ] Fix Confirm Order Page
 - [ ] Indicate user is logged in and display email
 - [ ] Allow links in footer to display form Checkout Menu created in Admin
 - [ ] Allow copyright to be editable in admin UI
