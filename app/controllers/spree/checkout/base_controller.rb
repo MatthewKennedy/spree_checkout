@@ -26,9 +26,8 @@ module Spree
 
       default_form_builder(Spree::Checkout::BootstrapBuilder)
 
-
       def title
-        "#{current_store.name} | #{I18n.t('spree_checkout.secure_checkout')}"
+        "#{current_store.name} | #{I18n.t("spree_checkout.secure_checkout")}"
       end
 
       def redirect_unauthorized_access

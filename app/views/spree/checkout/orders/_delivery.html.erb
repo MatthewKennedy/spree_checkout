@@ -26,7 +26,7 @@
     <% end %>
   </div>
 
-  <% if Spree::Checkout::Config[:shipping_instructions] %>
+  <% if current_store.checkout_shipping_instructions %>
     <div class="mt-4">
       <h5><%= I18n.t('spree_checkout.shipping_instructions') %></h5>
       <%= form.text_area :special_instructions, placeholder: I18n.t('spree_checkout.add_shipping_instructions'), cols: 40, rows: 4, class: "form-control" %>

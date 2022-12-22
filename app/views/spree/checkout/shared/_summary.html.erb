@@ -22,7 +22,7 @@
         <%= render partial: 'spree/checkout/shared/summary_line_items' %>
       </div>
 
-      <% if Spree::Checkout::Config[:coupon_codes_enabled] %>
+      <% if current_store.checkout_coupon_codes_enabled %>
         <hr>
 
         <%= form_with model: @order, url: spree.checkout_apply_coupon_path, data: { controller: 'form--state' } do |form| %>
@@ -58,7 +58,7 @@
           </span>
         <% end %>
 
-      <hr>
+        <hr>
       <% end %>
 
       <div class="summary_adjustments">
