@@ -29,6 +29,7 @@ en:
     express_checkout: Express checkout
     free: FREE
     log_in: Log in
+    log_out: Log out
     no_payment_method_options_provided_contact_the_store_owner: No payment options are provided, pleasecontact the store owner.
     payment_method: Payment Method
     return_to_address: Return to address

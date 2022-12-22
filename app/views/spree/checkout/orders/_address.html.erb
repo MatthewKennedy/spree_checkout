@@ -16,13 +16,29 @@
         <%= form.email_field :email, required: true, placeholder: Spree.t(:email) %>
         <%= form.label :email %>
       </div>
-
-      <div class="form-check">
-        <%#= form.check_box :use_shipping, { class: 'form-check-input' }, true, @order.shipping_eq_billing_address? %>
-        <%#= form.label :use_shipping, I18n.t('spree_checkout.email_me_news_and_promotions') %>
-      </div>
     </div>
   </div>
+<% else %>
+  <div class="row mb-4">
+    <div class="col-12">
+      <h5>
+        <%= I18n.t('spree_checkout.contact_information') %>
+      </h5>
+
+      <div class="d-flex">
+        <div class="flex-fill">
+          <%= try_spree_current_user.first_name %>
+          <%= try_spree_current_user.email %>
+        </div>
+        <div>
+          <%= link_to I18n.t('spree_checkout.log_out'), spree.logout_path %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
 <% end %>
 
 <div class="row">

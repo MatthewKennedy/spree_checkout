@@ -11,9 +11,8 @@
       <div class=my-3>
         <div class=notation-bar><h5>or</h5></div>
       </div>
-      <% path = spree.respond_to?(:update_checkout_registration_path) ? spree.update_checkout_registration_path : spree_signup_path %>
 
-      <%= form_for @order, url: path, method: :put, html: { id: 'checkout_form_registration', data: { turbo: false } } do |f| %>
+      <%= form_for @order, url: spree.checkout_update_registration_path do |f| %>
         <div class=d-flex>
           <div class=flex-fill>
             <div class="mb-3 form-floating">
