@@ -7,6 +7,7 @@ describe Spree::Checkout::OrdersController, type: :controller do
   let(:store) { Spree::Store.default }
 
   before do
+    allow(controller).to receive_messages spree_current_user: user
     allow(controller).to receive_messages try_spree_current_user: user
   end
 

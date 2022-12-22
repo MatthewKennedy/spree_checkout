@@ -15,17 +15,9 @@ module Spree
 
       def spree_checkout_accordion_show_hide(index)
         if index == 0
-          show_container = 'show'
+          "show"
         else
-          show_container = ''
-        end
-      end
-
-      def spree_checkout_accordion_show_first(index)
-        if index == 0
-          show_first = true
-        else
-          show_first = false
+          ""
         end
       end
 
