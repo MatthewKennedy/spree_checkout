@@ -12,7 +12,7 @@
         <div class=notation-bar><h5>or</h5></div>
       </div>
 
-      <%= form_for @order, url: spree.checkout_update_registration_path do |f| %>
+      <%= form_for @order, method: :put, url: spree.checkout_update_registration_path do |f| %>
         <div class=d-flex>
           <div class=flex-fill>
             <div class="mb-3 form-floating">
