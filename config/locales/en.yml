@@ -10,6 +10,7 @@ en:
       state_territory: State/Territory
       zipcode: Zipcode
     addresses: Addresses
+    add_shipping_instructions: Add shipping instructions...
     already_have_an_account: Already have an account?
     apply: Apply
     bill_to: Bill to
@@ -18,6 +19,7 @@ en:
     card_varifiction_code: Security code
     cardholders_name: Cardholders name
     change: change
+    secure_checkout: Secure Checkout
     contact_information: Contact information
     continue_to_complete: Complete order
     continue_to_confirm: Confirm Order
@@ -37,4 +39,5 @@ en:
     return_to_delivery: Return to shipping
     ship_to: Ship to
     shipping_method: Shipping method
+    shipping_instructions: Ship instructions
     subtotal: Subtotal
