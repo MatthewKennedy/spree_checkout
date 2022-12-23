@@ -16,7 +16,7 @@ en:
     company: Csompany
     contact_information: Contact information
     continue_to_complete: Complete order
-    continue_to_confirm: Confirm Order
+    continue_to_confirm: Confirm order
     continue_to_delivery: Continue to shipping
     continue_to_payment: Continue to payment
     country: Country
@@ -32,7 +32,7 @@ en:
     last_name: Last name
     no_payment_method_options_provided_contact_the_store_owner: No payment options are provided, pleasecontact the store owner.
     password: Password
-    payment_method: Payment Method
+    payment_method: Payment method
     phone: Phone
     post_code: Postcode
     remember_me: Remember me
