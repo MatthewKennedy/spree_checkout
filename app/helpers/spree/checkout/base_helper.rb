@@ -117,7 +117,7 @@ module Spree
         end
       end
 
-      def spree_checkout_menu(location = 'checkout_footer')
+      def spree_checkout_menu(location = "checkout_footer")
         method_name = "for_#{location}"
 
         if available_menus.respond_to?(method_name) && Spree::Menu::MENU_LOCATIONS_PARAMETERIZED.include?(location)
