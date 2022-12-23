@@ -116,6 +116,51 @@ module Spree
           return state if state_index == current_index - 1
         end
       end
+
+      def spree_checkout_menu(location = 'checkout_footer')
+        method_name = "for_#{location}"
+
+        if available_menus.respond_to?(method_name) && Spree::Menu::MENU_LOCATIONS_PARAMETERIZED.include?(location)
+          available_menus.send(method_name, I18n.locale) || current_store.default_menu(location)
+        end
+      end
+
+      def spree_checkout_spree_nav_link_tag(item, opts = {}, &block)
+        if item.new_window
+          target = opts[:target] || "_blank"
+          rel = opts[:rel] || "noopener noreferrer"
+        end
+
+        active_class = if request && current_page?(spree_checkout_spree_localized_link(item))
+          "active #{opts[:class]}"
+        else
+          opts[:class]
+        end
+
+        link_opts = {target: target, rel: rel, class: active_class, id: opts[:id], data: opts[:data], aria: opts[:aria]}
+
+        if block
+          link_to spree_checkout_spree_localized_link(item), link_opts, &block
+        else
+          link_to item.name, spree_checkout_spree_localized_link(item), link_opts
+        end
+      end
+
+      private
+
+      def spree_checkout_spree_localized_link(item)
+        return if item.link.nil?
+
+        output_locale = if locale_param
+          "/#{I18n.locale}"
+        end
+
+        if ["Spree::CmsPage"].include?(item.linked_resource_type)
+          output_locale.to_s + "checkout" + item.link
+        else
+          item.link
+        end
+      end
     end
   end
 end

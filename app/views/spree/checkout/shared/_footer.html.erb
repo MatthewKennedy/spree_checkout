@@ -8,6 +8,10 @@
 
 <div class="w-100 text-center">
   <small class="text-muted">
-    <a href="#">Shipping</a> | <a href="#">Returns</a> | <a href="#">Privacy</a> | <a href="#">Legal</a>
+    <% if spree_checkout_menu.present? %>
+      <% spree_checkout_menu.children.each do |parent| %>
+        <%= spree_checkout_spree_nav_link_tag(parent, data: {turbo_frame: :modal}) %> |
+      <% end %>
+    <% end %>
   </small>
 </div>

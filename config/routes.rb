@@ -17,6 +17,7 @@ Spree::Core::Engine.add_routes do
 
       root to: "orders#edit"
       get "/:state", to: "orders#edit", as: :state
+      get "/pages/:slug", to: "pages#show", as: :pages
 
       patch "update/:state", to: "orders#update"
       patch "apply_coupon", to: "orders#apply_coupon", as: :apply_coupon
