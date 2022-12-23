@@ -8,7 +8,7 @@ module Spree
         @address = try_spree_current_user.addresses.build(address_params)
 
         if create_service.call(user: try_spree_current_user, address_params: @address.attributes).success?
-          flash[:notice] = I18n.t(:successfully_created, scope: :address_book)
+          flash[:notice] = I18n.t(:successfully_created, scope: :spree_checkout)
           redirect_to spree.account_path
         else
           render action: :new, status: :unprocessable_entity
@@ -25,7 +25,7 @@ module Spree
 
       def update
         if update_service.call(address: @address, address_params: address_params).success?
-          flash[:notice] = Spree.t(:successfully_updated, scope: :address_book)
+          flash[:notice] = I18n.t(:successfully_updated, scope: :spree_checkout)
           redirect_back_or_default(addresses_path)
         else
           render :edit, status: :unprocessable_entity
@@ -35,7 +35,7 @@ module Spree
       def destroy
         @address.destroy
 
-        flash[:notice] = Spree.t(:successfully_removed, scope: :address_book)
+        flash[:notice] = I18n.t(:successfully_removed, scope: :spree_checkout)
         redirect_to(request.env["HTTP_REFERER"] || addresses_path) unless request.xhr?
       end
 

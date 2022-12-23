@@ -5,10 +5,10 @@
     <div class="row">
       <div class=<%= spree_checkout_city_field_class(@order.send(address_type).country) %>>
         <div class="form-floating mb-3">
-          <%= f.text_field :city, class: 'form-control', required: true, placeholder: Spree.t(:city) %>
+          <%= f.text_field :city, required: true, placeholder: I18n.t('spree_checkout.city') %>
 
           <%= f.label :city do %>
-            <%= Spree.t(:city) %> <abbr class=required title=required>*</abbr>
+            <%= I18n.t('spree_checkout.city') %> <abbr class=required title=required>*</abbr>
           <% end %>
         </div>
       </div>
@@ -17,9 +17,9 @@
         <div class="col-4">
           <div class="form-floating mb-3">
             <% if !@order.send(address_type).country.states.present? && @order.send(address_type).country.states_required? %>
-              <%= f.text_field :state_name, required: true, class: 'form-control', placeholder: raw(spree_checkout_state_label(@order.send(address_type).country) + spree_checkout_required_span_tag(@order.send(address_type).country.states_required?)) %>
+              <%= f.text_field :state_name, required: true, placeholder: raw(spree_checkout_state_label(@order.send(address_type).country) + spree_checkout_required_span_tag(@order.send(address_type).country.states_required?)) %>
             <% elsif @order.send(address_type).country.states.present? %>
-              <%= f.collection_select :state_id, @order.send(address_type).country.states.sort, :id, :name, {include_blank: true}, {required: @order.send(address_type).country.states_required?, class: 'form-select'} %>
+              <%= f.collection_select :state_id, @order.send(address_type).country.states.sort, :id, :name, {include_blank: true}, {required: @order.send(address_type).country.states_required?} %>
             <% end %>
             <%= f.label :state_id, raw(spree_checkout_state_label(@order.send(address_type).country) + spree_checkout_required_span_tag(@order.send(address_type).country.states_required?)) %>
           </div>
@@ -28,7 +28,7 @@
 
       <div class=<%= spree_checkout_zip_field_class(@order.send(address_type).country) %>>
         <div class="form-floating mb-3">
-          <%= f.text_field :zipcode, required: @order.send(address_type).country.zipcode_required?, class: 'form-control', placeholder: (raw(spree_checkout_zipcode_label(@order.send(address_type).country)) + spree_checkout_required_span_tag(@order.send(address_type).country.zipcode_required?)) %>
+          <%= f.text_field :zipcode, required: @order.send(address_type).country.zipcode_required?, placeholder: (raw(spree_checkout_zipcode_label(@order.send(address_type).country)) + spree_checkout_required_span_tag(@order.send(address_type).country.zipcode_required?)) %>
           <%= f.label :zipcode, (raw(spree_checkout_zipcode_label(@order.send(address_type).country)) + spree_checkout_required_span_tag(@order.send(address_type).country.zipcode_required?)) %>
         </div>
       </div>

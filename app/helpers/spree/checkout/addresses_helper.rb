@@ -4,24 +4,24 @@ module Spree
       def spree_checkout_state_label(country)
         case country.iso3
         when "ARE"
-          I18n.t("spree_checkout.address.emirate")
+          I18n.t("spree_checkout.emirate")
         when "AUS"
-          I18n.t("spree_checkout.address.state_territory")
+          I18n.t("spree_checkout.state_territory")
         else
-          I18n.t("spree_checkout.address.state")
+          I18n.t("spree_checkout.state")
         end
       end
 
       def spree_checkout_zipcode_label(country)
         case country.iso3
         when "GBR"
-          I18n.t("spree_checkout.address.post_code")
+          I18n.t("spree_checkout.post_code")
         when "CAN"
-          I18n.t("spree_checkout.address.post_code")
+          I18n.t("spree_checkout.post_code")
         when "AUS"
-          I18n.t("spree_checkout.address.post_code")
+          I18n.t("spree_checkout.post_code")
         else
-          I18n.t("spree_checkout.address.zipcode")
+          I18n.t("spree_checkout.zipcode")
         end
       end
 

@@ -185,10 +185,6 @@ module Spree
       def coupon_handler
         Spree::PromotionHandler::Coupon
       end
-
-      def permitted_checkout_attributes
-        super + [:use_shipping]
-      end
     end
   end
 end

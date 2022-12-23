@@ -1,9 +1,6 @@
 module Spree
   module Checkout
     class BootstrapBuilder < ActionView::Helpers::FormBuilder
-      # include ActionView::Helpers::TagHelper
-      # include ActionView::Context
-
       def label(method, text = nil, options = {})
         super(method, text, options.reverse_merge(class: "form-label"))
       end
@@ -36,12 +33,16 @@ module Spree
         super(method, options.reverse_merge(placeholder: method.to_s.capitalize, class: "form-control", data: {form__state_target: "watch"}, autocomplete: "off"))
       end
 
+      def phone_field(method, options = {})
+        super(method, options.reverse_merge(placeholder: method.to_s.capitalize, class: "form-control", data: {form__state_target: "watch"}, autocomplete: "off"))
+      end
+
       def text_area(method, options = {})
         super(method, options.reverse_merge(placeholder: method.to_s.capitalize, class: "form-control", data: {form__state_target: "watch"}))
       end
 
       def select(object_name, method_name, template_object, options = {}, &block)
-        super(object_name, method_name, template_object, options.reverse_merge(class: "form-select", data: {controller: "ts--select", form__state_target: "watch"}, &block))
+        super(object_name, method_name, template_object, options.reverse_merge(class: "form-select", data: {form__state_target: "watch"}, &block))
       end
 
       def file_field(method, options = {})
