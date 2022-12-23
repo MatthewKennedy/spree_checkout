@@ -5,9 +5,8 @@
 
 <% content_for :modal_body do %>
   <div class="container">
-
     <div class="col-12">
-      <%= form_for Spree.user_class.new, as: :spree_user, url: spree_login_path do |f| %>
+      <%= form_for Spree.user_class.new, as: :spree_user, url: spree_login_path, data: { turbo: false } do |f| %>
         <div id="password-credentials">
           <div class="form-floating mb-3">
             <%= f.email_field :email, placeholder: Spree.t(:email), value: params.dig(:spree_user, :email) %>
@@ -33,7 +32,6 @@
         </div>
       <% end %>
     </div>
-
   </div>
 <% end %>
 

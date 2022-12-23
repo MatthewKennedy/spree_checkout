@@ -40,13 +40,24 @@ module Spree
         flash.to_h.except("order_completed").each do |msg_type, text|
           next if msg_type.blank? || excluded_types.include?(msg_type)
 
-          flashes << content_tag(:div, class: "alert alert-#{class_for(msg_type)} mb-0") do
+          flashes << content_tag(:div, class: "alert alert-#{spree_checkout_class_for(msg_type)} mb-0") do
             content_tag(:button, "&times;".html_safe, class: "close", data: {dismiss: "alert", hidden: true}) +
               content_tag(:span, text)
           end
         end
 
         flashes.html_safe
+      end
+
+      def spree_checkout_class_for(flash_type)
+        {
+          success: "success",
+          registration_error: "danger",
+          error: "danger",
+          alert: "danger",
+          warning: "warning",
+          notice: "success"
+        }[flash_type.to_sym]
       end
 
       def spree_checkout_svg_tag(file_name, options = {})
