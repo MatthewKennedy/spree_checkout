@@ -56,9 +56,7 @@ then restart your server.
 - [ ] Fix address management flow
 - [ ] Fix Confirm Order Page
 - [ ] Fix logout login flow.
-- [ ] Indicate user is logged in and display email
 - [ ] Allow links in footer to display form Checkout Menu created in Admin
 - [ ] Allow copyright to be editable in admin UI
-- [ ] Fix Flash Messages
 - [ ] Write test suite for checkout flow
 - [ ] Ensure that the checkout works without any backend or frontend installed
