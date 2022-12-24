@@ -80,8 +80,9 @@ All javascript is found within the `app/javascript` folder.
 To work on the Javascript from the root of the `spree_checkout` folder run `yarn install` and then `yarn watch`.
 
 ### CSS
-All the css for Spree Checkout is found within the `app/sass` folder, as a Rails plugin this is intentionally done
-so that Propshaft or Sprockets can pick up ready to use CSS straight out of the assets folder.
+All the CSS for Spree Checkout is found within the `app/sass` folder, this is intentionally done
+so that Propshaft or Sprockets can pick up ready to use CSS straight out of the assets folder without additional configuration.
+This also provides a modern working environment for SCSS processing.
 
 To work on the CSS from the root of the `spree_checkout` folder run `yarn install` and then `yarn watch`.
 
