@@ -67,6 +67,24 @@ Rails.application.config.after_initialize do
 end
 ```
 
+## Development
+
+### Helper Methods
+To ensure Spree Checkout is a stand-alone Spree extension please scope any helper methods with `spree_checkout_`
+don't worry about trying to be DRY any use existing helpers from any other lib, just make a name scoped copy here and
+let that take the load, the only requirement for Spree Checkout to run should be Spree Core itself.
+
+### JavaScript
+All javascript is found within the `app/javascript` folder.
+
+To work on the Javascript from the root of the `spree_checkout` folder run `yarn install` and then `yarn watch`.
+
+### CSS
+All the css for Spree Checkout is found within the `app/sass` folder, as a Rails plugin this is intentionally done
+so that Propshaft or Sprockets can pick up ready to use CSS straight out of the assets folder.
+
+To work on the CSS from the root of the `spree_checkout` folder run `yarn install` and then `yarn watch`.
+
 ## TODO
 
 - [ ] Fix address management flow
