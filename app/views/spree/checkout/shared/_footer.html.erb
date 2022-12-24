@@ -9,8 +9,8 @@
 <div class="w-100 text-center">
   <small class="text-muted">
     <% if spree_checkout_menu.present? %>
-      <% spree_checkout_menu.children.each do |parent| %>
-        <%= spree_checkout_spree_nav_link_tag(parent, data: {turbo_frame: :modal}) %> |
+      <% spree_checkout_menu.children.each_with_index do |item, index| %>
+        <%= spree_checkout_spree_nav_link_tag(item, data: {turbo_frame: :modal}) %> <%= "<span class='mx-1'>|</span> ".html_safe unless item == spree_checkout_menu.children.last %>
       <% end %>
     <% end %>
   </small>

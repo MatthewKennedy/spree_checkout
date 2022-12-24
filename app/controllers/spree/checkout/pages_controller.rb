@@ -2,6 +2,7 @@ module Spree
   module Checkout
     class PagesController < Spree::Checkout::BaseController
       before_action :load_cms_page
+
       def show
       end
 
