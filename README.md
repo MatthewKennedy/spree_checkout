@@ -56,7 +56,17 @@ then restart your server.
 - [ ] Fix address management flow
 - [ ] Fix Confirm Order Page
 - [ ] Fix logout login flow.
-- [ ] Allow links in footer to display form Checkout Menu created in Admin
-- [ ] Allow copyright to be editable in admin UI
 - [ ] Write test suite for checkout flow
-- [ ] Ensure that the checkout works without any backend or frontend installed
+
+### Questions
+When a user signs out on the checkout/address page, should we send them back to the store,
+or build them a new order and land them back at the address page or registration page keeping them
+in the checkout flow?
+
+How do we handle the flexibility of using this with or without the standard Rails frontend vs API.
+For example if the buyer completes an order, do we send them to `orders/R123456799` and let the frontend
+take it from there, or do we try to handle that withing the scope of the `spree_checkout` application?
+
+
+
+
