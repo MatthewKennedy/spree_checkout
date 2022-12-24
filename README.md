@@ -19,13 +19,12 @@ Additionally, Spree Checkout is both Propshaft and Sprockets ready.
 
 Add
 ```ruby
-# TEMP TESTING SPREE FRONTEND
+# TEMP TESTING SPREE FRONTEND - RECOMMENDED AT THIS STAGE
 gem 'spree_frontend', github: 'spree/spree_legacy_frontend', branch: 'feature/use-spree-checkout'
-
-# TEMP FOR AUTH DEVISE
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'feature/prep-for-stand-alone-checkout'
-
 gem 'spree_checkout', github: 'MatthewKennedy/spree_checkout'
+
+# AUTH DEVISE COMPATIBLE VERSION
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'feature/prep-for-stand-alone-checkout'
 ```
 to your `Gemfile`.
 
@@ -51,22 +50,26 @@ Add for following to your app/assets/config/manifest.js
 then restart your server.
 
 
+## Checkout Flow
+
+For the most part, the checkout flow is unchanged, your customer enters the checkout at `/checkout`
+and upon completion the user is forwarded to `/orders/:order_number`, so this should be a drop-in replacement for
+your existing checkout system.
+
+When used with `spree_auth_devise` your customer is sent to the registrations page as the first checkout step by default.
+This can be changed so the customer is sent to the Address page as the first step be setting the following config:
+
+```ruby
+# config/initializers/spree.rb
+
+Rails.application.config.after_initialize do
+  Spree::Auth::Config[:registration_step] = false
+end
+```
+
 ## TODO
 
 - [ ] Fix address management flow
 - [ ] Fix Confirm Order Page
 - [ ] Fix logout login flow.
 - [ ] Write test suite for checkout flow
-
-### Questions
-When a user signs out on the checkout/address page, should we send them back to the store,
-or build them a new order and land them back at the address page or registration page keeping them
-in the checkout flow?
-
-How do we handle the flexibility of using this with or without the standard Rails frontend vs API.
-For example if the buyer completes an order, do we send them to `orders/R123456799` and let the frontend
-take it from there, or do we try to handle that withing the scope of the `spree_checkout` application?
-
-
-
-
