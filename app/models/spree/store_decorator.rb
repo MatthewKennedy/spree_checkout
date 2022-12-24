@@ -7,7 +7,7 @@ module Spree
         s.boolean :checkout_alternative_shipping_phone, default: false, null: true
         s.boolean :checkout_allow_guest_checkout, default: true, null: true
         s.boolean :checkout_address_requires_phone, default: true, null: true
-        s.string :checkout_copywrite_page_id
+        s.string :checkout_copyright_page_id
       end
     end
 
