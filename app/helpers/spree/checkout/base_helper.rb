@@ -93,7 +93,7 @@ module Spree
           end
         end
 
-        content_tag(:div, raw("<span class='cart-progress'><a href='#{spree.cart_path}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join("")),
+        content_tag(:div, raw("<span class='cart-progress'><a href='#{spree_checkout_cart_route}' class='completed'>#{Spree.t(:cart)}</a></span>" + items.join("")),
           class: "steps-container text-center step-#{@order.state}", id: "checkout-steps")
       end
 

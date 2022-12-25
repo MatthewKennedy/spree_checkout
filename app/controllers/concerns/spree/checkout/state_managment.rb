@@ -40,7 +40,7 @@ module Spree
 
       def load_order_with_lock
         @order = current_order(lock: true)
-        redirect_to(spree.cart_path) && return unless @order
+        redirect_to(spree_checkout_cart_route) && return unless @order
       end
 
       def ensure_valid_state_lock_version
@@ -62,11 +62,6 @@ module Spree
           redirect_to spree.checkout_state_path(@order.state) if @order.can_go_to_state?(params[:state]) && !skip_state_validation?
           @order.state = params[:state]
         end
-      end
-
-      # Provides a route to redirect after order completion
-      def completion_route(custom_params = {})
-        spree.order_path(@order, custom_params.merge(locale: locale_param))
       end
 
       def setup_for_current_state

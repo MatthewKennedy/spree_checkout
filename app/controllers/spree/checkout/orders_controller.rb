@@ -3,6 +3,7 @@ module Spree
     class OrdersController < Spree::Checkout::BaseController
       include Spree::Checkout::AddressBook
       include Spree::Checkout::StateManagment
+      include Spree::Checkout::PathsHelper
 
       before_action :set_cache_header, only: [:edit]
       before_action :set_current_order
@@ -41,7 +42,7 @@ module Spree
           if @order.completed?
             @current_order = nil
             flash["order_completed"] = true
-            redirect_to completion_route
+            redirect_to spree_checkout_completion_route(@order)
           else
             redirect_to spree.checkout_state_path(@order.state)
           end
@@ -125,17 +126,17 @@ module Spree
       end
 
       def ensure_checkout_allowed
-        redirect_to spree.cart_path unless @order.checkout_allowed?
+        redirect_to spree_checkout_cart_route unless @order.checkout_allowed?
       end
 
       def ensure_order_not_completed
-        redirect_to spree.cart_path if @order.completed?
+        redirect_to spree_checkout_cart_route if @order.completed?
       end
 
       def ensure_sufficient_stock_lines
         if @order.insufficient_stock_lines.present?
           flash[:error] = Spree.t(:inventory_error_flash_for_insufficient_quantity)
-          redirect_to spree.cart_path
+          redirect_to spree_checkout_cart_route
         end
       end
 

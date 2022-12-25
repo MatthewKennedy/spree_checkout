@@ -1,10 +1,5 @@
 Spree::Core::Engine.add_routes do
   scope "(:locale)", locale: /#{Spree.available_locales.join('|')}/, defaults: {locale: nil} do
-    unless Spree::Checkout::Engine.frontend_available?
-      get "/cart", to: "orders#edit", as: :cart
-      resources :orders, only: [:show]
-    end
-
     namespace :checkout do
       namespace :users do
         get :login

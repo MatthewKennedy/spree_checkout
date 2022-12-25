@@ -5,7 +5,7 @@
 <% end %>
 
 <% content_for :back_button do %>
-  <%= link_to spree.cart_path, class: 'btn btn-link' do %>
+  <%= link_to spree_checkout_cart_route, class: 'btn btn-link' do %>
     <%= spree_checkout_svg_tag('chevron-left.svg') %> <%= I18n.t('spree_checkout.return_to_cart') %>
   <% end %>
 <% end %>

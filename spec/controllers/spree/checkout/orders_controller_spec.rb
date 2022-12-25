@@ -29,19 +29,19 @@ describe Spree::Checkout::OrdersController, type: :controller do
     it "redirects to the cart path unless checkout_allowed?" do
       allow(order).to receive_messages checkout_allowed?: false
       get :edit, params: {state: "delivery"}
-      expect(response).to redirect_to(spree.cart_path)
+      expect(response).to redirect_to(spree_checkout_cart_route)
     end
 
     it "redirects to the cart path if current_order is nil" do
       allow(controller).to receive(:current_order).and_return(nil)
       get :edit, params: {state: "delivery"}
-      expect(response).to redirect_to(spree.cart_path)
+      expect(response).to redirect_to(spree_checkout_cart_route)
     end
 
     it "redirects to cart if order is completed" do
       allow(order).to receive_messages(completed?: true)
       get :edit, params: {state: "address"}
-      expect(response).to redirect_to(spree.cart_path)
+      expect(response).to redirect_to(spree_checkout_cart_route)
     end
 
     # Regression test for #2280
@@ -658,7 +658,7 @@ describe Spree::Checkout::OrdersController, type: :controller do
 
       it "redirects to the cart_path" do
         post :update, params: {state: "confirm"}
-        expect(response).to redirect_to spree.cart_path
+        expect(response).to redirect_to spree_checkout_cart_route
       end
     end
 
@@ -768,7 +768,7 @@ describe Spree::Checkout::OrdersController, type: :controller do
       end
 
       it "redirects to cart" do
-        expect(response).to redirect_to spree.cart_path
+        expect(response).to redirect_to spree_checkout_cart_route
       end
 
       it "sets flash message for no inventory" do
