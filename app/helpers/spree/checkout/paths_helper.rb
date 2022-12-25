@@ -1,7 +1,6 @@
 module Spree
   module Checkout
     module PathsHelper
-
       # Provides a localized path to redirect after order completion
       def spree_checkout_completion_route(order)
         path = "#{Rails.application.config_for(:spree_checkout).orders_path_name}/#{order.number}"
