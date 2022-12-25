@@ -67,6 +67,17 @@ Rails.application.config.after_initialize do
 end
 ```
 
+If you wish to have Spree Checkout redirect your customer to a different entry or exit point you can add the following to your Spree initializer file.
+```ruby
+# config/initializers/spree.rb
+
+# Default is : orders creating the path:  /orders/[:order_number]
+Rails.configuration.x.spree_checkout.orders_path_name = :your_custom_order_path_name
+
+# Default is :cart crating the path: /cart
+Rails.configuration.x.spree_checkout.cart_path_name = :your_custom_cart_path_name
+```
+
 ## Development
 
 ### Helper Methods
