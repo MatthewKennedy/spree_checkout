@@ -40,7 +40,7 @@ module Spree
 
       def load_order_with_lock
         @order = current_order(lock: true)
-        redirect_to(spree_checkout_cart_route) && return unless @order
+        redirect_to(helpers.spree_checkout_cart_route) && return unless @order
       end
 
       def ensure_valid_state_lock_version
