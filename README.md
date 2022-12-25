@@ -67,7 +67,7 @@ Rails.application.config.after_initialize do
 end
 ```
 
-If you wish to have Spree Checkout redirect your customer to a different entry or exit point you can add the following to your Spree initializer file.
+If you wish to have Spree Checkout redirect your customer to a different exit point you can add the following to your Spree initializer file.
 ```ruby
 # config/initializers/spree.rb
 
