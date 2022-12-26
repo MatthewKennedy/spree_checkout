@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version = Spree::Checkout.version
   s.authors = ["Matthew Kennedy"]
   s.email = "m.kennedy@me.com"
-  s.summary = "The default Storefront built with Rails and Turbo/Hotwire for Spree eCommerce platform"
+  s.summary = "A stand alone checkout system for Spree."
   s.description = s.summary
   s.homepage = "https://github.com/MatthewKennedy/spree_checkout"
   s.license = "BSD-3-Clause"
@@ -30,6 +30,4 @@ Gem::Specification.new do |s|
   s.add_dependency "inline_svg"
   s.add_dependency "responders"
   s.add_dependency "turbo-rails"
-
-  s.add_development_dependency "capybara-accessible"
 end
