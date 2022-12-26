@@ -6,3 +6,4 @@ require "turbo-rails"
 require "responders"
 
 require "spree/checkout/engine"
+require "spree/checkout/configuration"

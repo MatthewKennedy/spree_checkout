@@ -71,11 +71,10 @@ If you wish to have Spree Checkout redirect your customer to a different exit po
 ```ruby
 # config/initializers/spree.rb
 
-# Default is : orders creating the path:  /orders/[:order_number]
-Rails.configuration.x.spree_checkout.orders_path_name = :your_custom_order_path_name
-
-# Default is :cart crating the path: /cart
-Rails.configuration.x.spree_checkout.cart_path_name = :your_custom_cart_path_name
+SpreeCheckout.configure do |config|
+  config.cart_route_name = :your_custom_cart_path_name
+  config.orders_route_name = :your_custom_order_path_name
+end
 ```
 
 ## Development
